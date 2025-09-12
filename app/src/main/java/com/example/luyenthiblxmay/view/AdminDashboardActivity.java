@@ -45,9 +45,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     case 0: // Quản lý mẹo
                         startActivity(new Intent(AdminDashboardActivity.this, AdminTipsActivity.class));
                         break;
-//                    case 1: // Quản lý tài khoản
-//                        startActivity(new Intent(AdminDashboardActivity.this, AdminUserActivity.class));
-//                        break;
+                    case 1: // Quản lý tài khoản
+                        startActivity(new Intent(AdminDashboardActivity.this, AdminUsersActivity.class));
+                        break;
                 }
             }
         });

@@ -24,7 +24,7 @@ public interface UserDao {
 
     // Delete user
     @Delete
-    int delete(User user);
+    int deleteUser(User user);
 
     // Delete tất cả users
     @Query("DELETE FROM users")

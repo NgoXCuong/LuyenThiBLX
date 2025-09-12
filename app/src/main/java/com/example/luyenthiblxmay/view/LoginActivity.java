@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.luyenthiblxmay.MainActivity;
 import com.example.luyenthiblxmay.R;
-import com.example.luyenthiblxmay.controlller.UserRepository;
+import com.example.luyenthiblxmay.controlller.UserController;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView tvForgotPassword;
 
-    private UserRepository userRepository;
+    private UserController userController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initViews();
-        userRepository = new UserRepository(getApplication());
+        userController = new UserController(getApplication());
 
         btnLogin.setOnClickListener(v -> login());
         btnRegister.setOnClickListener(v -> {
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setEnabled(false);
 
         // Login user
-        userRepository.loginUser(email, password, (success, user, message) -> runOnUiThread(() -> {
+        userController.loginUser(email, password, (success, user, message) -> runOnUiThread(() -> {
             progressBar.setVisibility(View.GONE);
             btnLogin.setEnabled(true);
 

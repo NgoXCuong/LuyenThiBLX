@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.luyenthiblxmay.R;
 import com.example.luyenthiblxmay.model.User;
-import com.example.luyenthiblxmay.controlller.UserRepository;
+import com.example.luyenthiblxmay.controlller.UserController;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView tvPasswordStrength;
 
-    private UserRepository userRepository;
+    private UserController userController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         initViews();
-        userRepository = new UserRepository(getApplication());
+        userController = new UserController(getApplication());
 
         btnRegister.setOnClickListener(v -> registerUser());
         btnBackToLogin.setOnClickListener(v -> finish());
@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setEnabled(false);
 
         // Kiểm tra email và phone đã tồn tại chưa
-        userRepository.checkEmailExists(email, exists -> {
+        userController.checkEmailExists(email, exists -> {
             if (exists) {
                 runOnUiThread(() -> {
                     progressBar.setVisibility(View.GONE);
@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                     etEmail.setError("Email đã được sử dụng");
                 });
             } else {
-                userRepository.checkPhoneExists(phone, phoneExists -> {
+                userController.checkPhoneExists(phone, phoneExists -> {
                     if (phoneExists) {
                         runOnUiThread(() -> {
                             progressBar.setVisibility(View.GONE);
@@ -114,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
                         newUser.setPassword(hashPassword(password)); // Nếu muốn hash thì hash trước khi insert
                         newUser.setAdmin(false);
 
-                        userRepository.insertUser(newUser, (success, message) -> runOnUiThread(() -> {
+                        userController.insertUser(newUser, (success, message) -> runOnUiThread(() -> {
                             progressBar.setVisibility(View.GONE);
                             btnRegister.setEnabled(true);
                             Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();

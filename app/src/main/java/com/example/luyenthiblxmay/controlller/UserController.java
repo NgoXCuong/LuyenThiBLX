@@ -4,6 +4,9 @@ import static com.example.luyenthiblxmay.utils.PasswordUtils.hashPassword;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.luyenthiblxmay.dao.UserDao;
 import com.example.luyenthiblxmay.database.AppDatabase;
 import com.example.luyenthiblxmay.model.User;
@@ -12,11 +15,11 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class UserRepository {
+public class UserController {
     private final UserDao userDao;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    public UserRepository(Application application) {
+    public UserController(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         userDao = db.userDao();
     }
@@ -89,40 +92,18 @@ public class UserRepository {
     }
 
 
-    // Lấy tất cả admin
-    public void getAllAdmins(AdminListCallback callback) {
+    // Lấy tất cả user bằng LiveData
+    public LiveData<List<User>> getAllUsers() {
+        MutableLiveData<List<User>> liveData = new MutableLiveData<>();
         executor.execute(() -> {
             try {
-                List<User> admins = userDao.getAllAdminsDirect();
-                if (callback != null) callback.onResult(admins);
+                List<User> users = userDao.getAllUsersDirect();
+                liveData.postValue(users);
             } catch (Exception e) {
-                if (callback != null) callback.onResult(null);
+                liveData.postValue(null);
             }
         });
-    }
-
-    // Lấy user theo ID
-    public void getUserById(int userId, UserCallback callback) {
-        executor.execute(() -> {
-            try {
-                User user = userDao.getUserById(userId);
-                if (callback != null) callback.onResult(user);
-            } catch (Exception e) {
-                if (callback != null) callback.onResult(null);
-            }
-        });
-    }
-
-    // Lấy user theo email
-    public void getUserByEmail(String email, UserCallback callback) {
-        executor.execute(() -> {
-            try {
-                User user = userDao.getUserByEmail(email);
-                if (callback != null) callback.onResult(user);
-            } catch (Exception e) {
-                if (callback != null) callback.onResult(null);
-            }
-        });
+        return liveData;
     }
 
     // Update user
@@ -130,7 +111,19 @@ public class UserRepository {
         executor.execute(() -> {
             try {
                 userDao.updateUser(user);
-                if (callback != null) callback.onResult(true, "Cập nhật thông tin thành công!");
+                if (callback != null) callback.onResult(true, "Cập nhật thành công!");
+            } catch (Exception e) {
+                if (callback != null) callback.onResult(false, "Lỗi: " + e.getMessage());
+            }
+        });
+    }
+
+    // Delete user
+    public void deleteUser(User user, DeleteCallback callback) {
+        executor.execute(() -> {
+            try {
+                userDao.deleteUser(user);
+                if (callback != null) callback.onResult(true, "Xóa thành công!");
             } catch (Exception e) {
                 if (callback != null) callback.onResult(false, "Lỗi: " + e.getMessage());
             }
@@ -150,15 +143,15 @@ public class UserRepository {
         void onResult(boolean success, User user, String message);
     }
 
-    public interface AdminListCallback {
-        void onResult(List<User> adminList);
-    }
-
-    public interface UserCallback {
-        void onResult(User user);
-    }
-
     public interface UpdateCallback {
         void onResult(boolean success, String message);
+    }
+
+    public interface DeleteCallback {
+        void onResult(boolean success, String message);
+    }
+
+    public interface UserListCallback {
+        void onResult(List<User> users);
     }
 }

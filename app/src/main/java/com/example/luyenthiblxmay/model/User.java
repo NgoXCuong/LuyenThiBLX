@@ -44,6 +44,16 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public User(String fullName, String email, String phone, String password, boolean isAdmin) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.createdAt = System.currentTimeMillis();
+    }
+
+
     public int getId() {
         return id;
     }
