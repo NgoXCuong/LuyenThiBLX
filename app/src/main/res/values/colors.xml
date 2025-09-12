@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorSecondary">#FFC107</color>
+
+    <!-- Text Colors -->
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+
+    <!-- Menu Card Colors -->
+    <color name="menu_card_1">#FF6B6B</color>
+    <color name="menu_card_2">#4ECDC4</color>
+    <color name="menu_card_3">#45B7D1</color>
+    <color name="menu_card_4">#96CEB4</color>
+    <color name="menu_card_5">#FFEAA7</color>
+    <color name="menu_card_6">#DDA0DD</color>
+
+    <!-- Button Colors -->
+    <color name="buttonEnabledColor">#1976D2</color>
+    <color name="buttonDisabledColor">#BDBDBD</color>
+    <color name="buttonPressedColor">#1565C0</color>
+</resources>

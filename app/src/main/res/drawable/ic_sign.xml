@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Cột biển báo -->
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M11,2h2v20h-2z" />
+    <!-- Tấm biển hình chữ nhật -->
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M4,4h16v6H4z" />
+</vector>
