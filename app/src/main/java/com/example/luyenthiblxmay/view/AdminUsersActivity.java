@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.luyenthiblxmay.R;
 import com.example.luyenthiblxmay.adapter.UserAdapter;
-import com.example.luyenthiblxmay.controlller.UserController;
+import com.example.luyenthiblxmay.controller.UserController;
 import com.example.luyenthiblxmay.model.User;
 
 import java.util.List;
@@ -49,6 +50,10 @@ public class AdminUsersActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnAddUser).setOnClickListener(v -> showAddDialog());
+
+        // Nút back
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
     }
 
     private void showAddDialog() {

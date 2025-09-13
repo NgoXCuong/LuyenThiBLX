@@ -3,17 +3,13 @@ package com.example.luyenthiblxmay.view;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.luyenthiblxmay.R;
 import com.example.luyenthiblxmay.adapter.TipsAdapter;
-import com.example.luyenthiblxmay.controlller.TipsController;
+import com.example.luyenthiblxmay.controller.TipsController;
 import com.example.luyenthiblxmay.model.Tips;
 
 import java.util.ArrayList;

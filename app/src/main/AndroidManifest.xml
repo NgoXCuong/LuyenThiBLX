@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LuyenThiBLXMay">
         <activity
+            android:name=".view.QuestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ModuleActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.AdminUsersActivity"
             android:exported="false" />
         <activity

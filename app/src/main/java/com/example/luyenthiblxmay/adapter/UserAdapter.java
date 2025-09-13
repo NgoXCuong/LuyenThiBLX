@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.luyenthiblxmay.R;
-import com.example.luyenthiblxmay.controlller.UserController;
+import com.example.luyenthiblxmay.controller.UserController;
 import com.example.luyenthiblxmay.model.User;
 
 import java.util.ArrayList;

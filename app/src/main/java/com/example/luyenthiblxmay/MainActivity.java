@@ -2,6 +2,8 @@ package com.example.luyenthiblxmay;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +17,8 @@ import androidx.room.Room;
 import com.example.luyenthiblxmay.dao.UserDao;
 import com.example.luyenthiblxmay.database.AppDatabase;
 import com.example.luyenthiblxmay.model.User;
+import com.example.luyenthiblxmay.view.LoginActivity;
+import com.example.luyenthiblxmay.view.ModuleActivity;
 import com.example.luyenthiblxmay.view.TipsActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         LinearLayout layoutMeoHocTap = findViewById(R.id.layoutMeoHocTap);
-//        LinearLayout layoutHocLyThuet = findViewById(R.id.layoutHocLyThuyet);
+        LinearLayout layoutHocLyThuet = findViewById(R.id.layoutHocLyThuyet);
 
 
         layoutMeoHocTap.setOnClickListener(v -> {
@@ -39,29 +43,46 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, TipsActivity.class);
             startActivity(intent);
         });
-//
-//        layoutHocLyThuet.setOnClickListener(v -> {
-//            // Chuyển sang trang khác
-//            Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
-//            startActivity(intent);
-//        });
 
+        layoutHocLyThuet.setOnClickListener(v -> {
+            // Chuyển sang trang khác
+            Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
+            startActivity(intent);
+        });
 
-
-
-        TextView textView = findViewById(R.id.textViewFullName);
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                        AppDatabase.class, "driving_test_a1_database")
+                        AppDatabase.class, "user_database")
                 .allowMainThreadQueries() // ⚠️ chỉ dùng cho test, thực tế nên dùng AsyncTask/Executor
                 .build();
 
         UserDao userDao = db.userDao();
+        int userId = getIntent().getIntExtra("user_id", -1); // mặc định -1 nếu không có
+        TextView textView = findViewById(R.id.textViewFullName);
 
-        User user = userDao.getUserById(1);
-
-        if (user != null) {
-            textView.setText(user.getFullName());
+        if (userId != -1) {
+            User user = userDao.getUserById(userId);
+            if (user != null) {
+                textView.setText(user.getFullName());
+            } else {
+                textView.setText("User không tồn tại");
+            }
+        } else {
+            textView.setText("ID không hợp lệ");
         }
+
+        ImageView logoutBtn = findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(v -> {
+            // Xóa dữ liệu login nếu có (SharedPreferences)
+            getSharedPreferences("user_prefs", MODE_PRIVATE).edit().clear().apply();
+
+            // Quay về LoginActivity
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // xóa toàn bộ stack cũ
+            startActivity(intent);
+            finish(); // kết thúc MainActivity
+        });
+
+
     }
 }

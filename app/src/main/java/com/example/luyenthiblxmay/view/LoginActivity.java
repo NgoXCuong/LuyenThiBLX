@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.luyenthiblxmay.MainActivity;
 import com.example.luyenthiblxmay.R;
-import com.example.luyenthiblxmay.controlller.UserController;
+import com.example.luyenthiblxmay.controller.UserController;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {

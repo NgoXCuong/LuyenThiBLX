@@ -56,24 +56,15 @@
 
             </LinearLayout>
 
-            <!-- Setting Icon -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardSettings"
+            <!-- Logout Icon -->
+            <ImageView
+                android:id="@+id/logoutBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:cardCornerRadius="20dp"
-                android:clickable="true"
-                app:cardElevation="2dp"
-                android:foreground="?attr/selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_settings"
-                    android:contentDescription="Settings" />
-
-            </androidx.cardview.widget.CardView>
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_logout"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="4dp" />
 
         </LinearLayout>
 

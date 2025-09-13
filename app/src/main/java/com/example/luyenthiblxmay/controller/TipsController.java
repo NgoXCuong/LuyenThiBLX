@@ -1,9 +1,8 @@
-package com.example.luyenthiblxmay.controlller;
+package com.example.luyenthiblxmay.controller;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.luyenthiblxmay.dao.TipsDao;
 import com.example.luyenthiblxmay.database.AppDatabase;

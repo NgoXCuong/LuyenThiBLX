@@ -1,4 +1,4 @@
-package com.example.luyenthiblxmay.controlller;
+package com.example.luyenthiblxmay.controller;
 
 import static com.example.luyenthiblxmay.utils.PasswordUtils.hashPassword;
 

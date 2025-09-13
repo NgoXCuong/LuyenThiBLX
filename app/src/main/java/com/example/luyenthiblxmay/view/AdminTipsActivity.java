@@ -6,21 +6,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.luyenthiblxmay.R;
 import com.example.luyenthiblxmay.adapter.AdminTipsAdapter;
-import com.example.luyenthiblxmay.controlller.TipsController;
+import com.example.luyenthiblxmay.controller.TipsController;
 import com.example.luyenthiblxmay.model.Tips;
 
 import java.util.List;
@@ -39,6 +36,10 @@ public class AdminTipsActivity extends AppCompatActivity {
         tipsController = new TipsController(getApplication());
         recyclerView = findViewById(R.id.recyclerViewAdminTips);
         btnAddTip = findViewById(R.id.btnAddTip);
+
+        // Nút back
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         adapter = new AdminTipsAdapter(this, new AdminTipsAdapter.OnTipActionListener() {
             @Override
