@@ -7,56 +7,52 @@ import com.example.luyenthiblxmay.dao.QuestionDao;
 import com.example.luyenthiblxmay.model.Question;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class QuestionController {
+    private final QuestionDao questionDao;
+    private final ExecutorService executorService;
 
-    private QuestionDao questionDao;
+    public interface Callback<T> {
+        void onResult(T result);
+    }
 
     public QuestionController(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         questionDao = db.questionDao();
+        executorService = Executors.newSingleThreadExecutor();
     }
 
-    /**
-     * Lấy tất cả câu hỏi
-     */
-    public List<Question> getAllQuestions() {
-        return questionDao.getAllQuestions();
+    public void addQuestion(Question question) {
+        executorService.execute(() -> questionDao.insert(question));
     }
 
-    /**
-     * Lấy câu hỏi theo category
-     */
-    public List<Question> getQuestionsByCategory(String category) {
-        return questionDao.getQuestionsByCategory(category);
+    public void updateQuestion(Question question) {
+        executorService.execute(() -> questionDao.update(question));
     }
 
-    /**
-     * Cập nhật trạng thái đã trả lời và câu trả lời người dùng
-     */
-    public void updateAnswer(int questionId, String selectedAnswer, boolean isAnswered) {
-        Question question = questionDao.getQuestionById(questionId);
-        if (question != null) {
-            question.setSelectedAnswer(selectedAnswer);
-            question.setAnswered(isAnswered);
-            questionDao.updateQuestion(question);
-        }
+    public void deleteQuestion(Question question) {
+        executorService.execute(() -> questionDao.delete(question));
     }
 
-    /**
-     * Tính tiến trình học tập (số câu trả lời / tổng câu) theo category
-     */
-    public int getProgressByCategory(String category) {
-        List<Question> questions = questionDao.getQuestionsByCategory(category);
-        if (questions == null || questions.isEmpty()) return 0;
+    public void deleteAllQuestions() {
+        executorService.execute(questionDao::deleteAll);
+    }
 
-        int answeredCount = 0;
-        for (Question q : questions) {
-            if (q.isAnswered()) answeredCount++;
-        }
+    // ✅ Lấy tất cả question (async)
+    public void getAllQuestions(Callback<List<Question>> callback) {
+        executorService.execute(() -> {
+            List<Question> questions = questionDao.getAllQuestions();
+            callback.onResult(questions);
+        });
+    }
 
-        // Trả về phần trăm
-        return (int) ((answeredCount * 100.0) / questions.size());
+    // ✅ Lấy question theo category (async)
+    public void getQuestionsByCategory(String category, Callback<List<Question>> callback) {
+        executorService.execute(() -> {
+            List<Question> questions = questionDao.getQuestionsByCategory(category);
+            callback.onResult(questions);
+        });
     }
 }
-

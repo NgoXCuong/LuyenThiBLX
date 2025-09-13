@@ -1,40 +1,36 @@
 package com.example.luyenthiblxmay.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.luyenthiblxmay.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.luyenthiblxmay.controller.QuestionController;
+import com.example.luyenthiblxmay.model.Question;
 
 public class ModuleActivity extends AppCompatActivity {
-    // ProgressBars
-    private ProgressBar progressBook, progressEthics, progressDrive, progressSigns, progressSimulation;
-    // TextViews hiển thị tiến độ
-    private TextView txtProgressBook, txtProgressEthics, txtProgressDrive, txtProgressSigns, txtProgressSimulation;
 
+    private ProgressBar progressBook, progressEthics, progressDrive, progressSigns, progressSimulation;
+    private TextView txtProgressBook, txtProgressEthics, txtProgressDrive, txtProgressSigns, txtProgressSimulation;
     private ImageView backButton;
+    private QuestionController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_module);
 
+        controller = new QuestionController(this);
+
+        // Back button
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        // Khởi tạo ProgressBars và TextViews
+        // Progress bars
         progressBook = findViewById(R.id.progressBarBook);
         txtProgressBook = findViewById(R.id.txtProgressBook);
 
@@ -50,24 +46,47 @@ public class ModuleActivity extends AppCompatActivity {
         progressSimulation = findViewById(R.id.progressBarSimulation);
         txtProgressSimulation = findViewById(R.id.txtProgressSimulation);
 
-        // Giả lập dữ liệu tiến độ (có thể lấy từ DB hoặc SharedPreferences)
-        int doneBook = 40, totalBook = 100;
-        int doneEthics = 3, totalEthics = 10;
-        int doneDrive = 5, totalDrive = 15;
-        int doneSigns = 30, totalSigns = 90;
-        int doneSimulation = 10, totalSimulation = 35;
-
-        // Cập nhật progress
-        updateProgress(progressBook, txtProgressBook, doneBook, totalBook);
-        updateProgress(progressEthics, txtProgressEthics, doneEthics, totalEthics);
-        updateProgress(progressDrive, txtProgressDrive, doneDrive, totalDrive);
-        updateProgress(progressSigns, txtProgressSigns, doneSigns, totalSigns);
-        updateProgress(progressSimulation, txtProgressSimulation, doneSimulation, totalSimulation);
+        // Card click listeners → mở QuestionsByCategoryActivity theo module
+        findViewById(R.id.cardBook).setOnClickListener(v -> openQuestionActivity("KHÁI NIỆM VÀ QUY TẮC"));
+        findViewById(R.id.cardEthics).setOnClickListener(v -> openQuestionActivity("Văn hóa và đạo đức lái xe"));
+        findViewById(R.id.cardDrive).setOnClickListener(v -> openQuestionActivity("Kỹ thuật lái xe"));
+        findViewById(R.id.cardSigns).setOnClickListener(v -> openQuestionActivity("Biển báo"));
+        findViewById(R.id.cardSimulation).setOnClickListener(v -> openQuestionActivity("Sa hinh"));
     }
 
-    private void updateProgress(ProgressBar progressBar, TextView textView, int done, int total) {
-        progressBar.setMax(total);
-        progressBar.setProgress(done);
-        textView.setText(done + "/" + total);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Cập nhật progress động từng category
+        updateCategoryProgress("KHÁI NIỆM VÀ QUY TẮC", progressBook, txtProgressBook);
+        updateCategoryProgress("Văn hóa và đạo đức lái xe", progressEthics, txtProgressEthics);
+        updateCategoryProgress("Kỹ thuật lái xe", progressDrive, txtProgressDrive);
+        updateCategoryProgress("Biển báo", progressSigns, txtProgressSigns);
+        updateCategoryProgress("Sa hinh", progressSimulation, txtProgressSimulation);
+    }
+
+    private void updateCategoryProgress(String category, ProgressBar progressBar, TextView textView) {
+        controller.getQuestionsByCategory(category, questions -> {
+            int done = 0;
+            for (Question q : questions) {
+                if (q.isAnswered()) done++;
+            }
+
+            final int totalQuestions = questions.size();
+            final int doneCount = done;
+
+            runOnUiThread(() -> {
+                progressBar.setMax(totalQuestions);
+                progressBar.setProgress(doneCount);
+                textView.setText(doneCount + "/" + totalQuestions);
+            });
+        });
+    }
+
+    // ✅ Mở Activity hiển thị câu hỏi theo category
+    private void openQuestionActivity(String category) {
+        Intent intent = new Intent(this, QuestionsActivity.class);
+        intent.putExtra("category", category);
+        startActivity(intent);
     }
 }

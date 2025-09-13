@@ -15,6 +15,15 @@
             android:name=".view.QuestionsActivity"
             android:exported="false" />
         <activity
+            android:name=".view.AdminQuestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.AdminQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.QuestionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ModuleActivity"
             android:exported="false" />
         <activity

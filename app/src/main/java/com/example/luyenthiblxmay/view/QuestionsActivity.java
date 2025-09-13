@@ -1,26 +1,52 @@
 package com.example.luyenthiblxmay.view;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.luyenthiblxmay.R;
+import com.example.luyenthiblxmay.adapter.QuestionAdapter;
+import com.example.luyenthiblxmay.controller.QuestionController;
+import com.example.luyenthiblxmay.model.Question;
+
+import java.util.ArrayList;
 
 public class QuestionsActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private QuestionAdapter adapter;
+    private QuestionController questionController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_questions);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        recyclerView = findViewById(R.id.recyclerViewQuestionsByCategory);
+        ImageView backButton = findViewById(R.id.backButton);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Nhận category từ Intent
+        String category = getIntent().getStringExtra("category");
+
+        questionController = new QuestionController(this);
+
+        // Adapter khởi tạo với list rỗng
+        adapter = new QuestionAdapter(this, new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+        // Lấy danh sách câu hỏi theo category (async)
+        questionController.getQuestionsByCategory(category, result -> {
+            runOnUiThread(() -> {
+                adapter.setQuestions(result);
+                adapter.notifyDataSetChanged();
+            });
         });
+
+        backButton.setOnClickListener(v -> finish());
     }
 }

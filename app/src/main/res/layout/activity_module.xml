@@ -42,6 +42,7 @@
 
         <!-- KHÁI NIỆM VÀ QUY TẮC -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -96,6 +97,7 @@
 
         <!-- Văn hóa và đạo đức lái xe -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardEthics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -150,6 +152,7 @@
 
         <!-- Kỹ thuật lái xe -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardDrive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -204,6 +207,7 @@
 
         <!-- Biển báo -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardSigns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -258,6 +262,7 @@
 
         <!-- Sa hình -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardSimulation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"

@@ -1,6 +1,7 @@
 package com.example.luyenthiblxmay.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -16,7 +17,6 @@ public class Question {
 
     private String question;
 
-
     @TypeConverters(OptionsConverter.class)
     private Map<String, String> options;
 
@@ -29,9 +29,10 @@ public class Question {
     private boolean isAnswered;
     private String selectedAnswer;
 
-    // Constructor + getter/setter như cũ, thêm getter/setter cho isAnswered & selectedAnswer
-    public Question(){}
+    public Question() {}
 
+    // Constructor dùng trong code, Room sẽ bỏ qua
+    @Ignore
     public Question(int id, String question, Map<String, String> options, String answer, String explanation, String category, String image, boolean isAnswered, String selectedAnswer) {
         this.id = id;
         this.question = question;

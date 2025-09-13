@@ -50,9 +50,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminDashboardActivity.this, AdminUsersActivity.class))
         );
 
-//        cardManageQuestions.setOnClickListener(v ->
-//                startActivity(new Intent(AdminDashboardActivity.this, AdminQuestionsActivity.class))
-//        );
+        cardManageQuestions.setOnClickListener(v ->
+                startActivity(new Intent(AdminDashboardActivity.this, AdminQuestionsActivity.class))
+        );
 //
 //        cardManageExams.setOnClickListener(v ->
 //                startActivity(new Intent(AdminDashboardActivity.this, AdminExamsActivity.class))

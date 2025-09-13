@@ -3,6 +3,7 @@ package com.example.luyenthiblxmay.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
@@ -34,6 +35,7 @@ public class User {
         this.isAdmin = false; // mặc định là user thường
     }
 
+    @Ignore
     public User(int id, String fullName, String email, String phone, String password, long createdAt, boolean isAdmin) {
         this.id = id;
         this.fullName = fullName;
@@ -44,6 +46,7 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    @Ignore
     public User(String fullName, String email, String phone, String password, boolean isAdmin) {
         this.fullName = fullName;
         this.email = email;
