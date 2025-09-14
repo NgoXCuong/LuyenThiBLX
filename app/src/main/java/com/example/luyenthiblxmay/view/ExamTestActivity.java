@@ -2,6 +2,7 @@ package com.example.luyenthiblxmay.view;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -46,6 +47,10 @@ public class ExamTestActivity extends AppCompatActivity {
         tvQuestion = findViewById(R.id.tvQuestion);
         rgOptions = findViewById(R.id.rgOptions);
         btnNext = findViewById(R.id.btnNext);
+
+        // Nút back
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         examController = new ExamController(getApplication());
 

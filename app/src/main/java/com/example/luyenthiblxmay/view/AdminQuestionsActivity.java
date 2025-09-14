@@ -3,7 +3,10 @@ package com.example.luyenthiblxmay.view;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -22,7 +25,7 @@ import java.util.Map;
 public class AdminQuestionsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private View btnAddQuestion;
+    private ImageButton btnAddQuestion;
     private AdminQuestionsAdapter adapter;
     private QuestionController questionController;
 
@@ -33,6 +36,10 @@ public class AdminQuestionsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewQuestions);
         btnAddQuestion = findViewById(R.id.btnAddQuestion);
+
+        // Nút back
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdminQuestionsAdapter();

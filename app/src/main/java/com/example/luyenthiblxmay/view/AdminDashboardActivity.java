@@ -14,7 +14,7 @@ import com.example.luyenthiblxmay.R;
 public class AdminDashboardActivity extends AppCompatActivity {
 
     private ImageView logoutBtn;
-    private CardView cardManageTips, cardManageUsers, cardManageQuestions, cardManageExams, cardManageSigns;
+    private CardView cardManageTips, cardManageUsers, cardManageQuestions, cardManageSigns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         cardManageTips = findViewById(R.id.card_manage_tips);
         cardManageUsers = findViewById(R.id.card_manage_users);
         cardManageQuestions = findViewById(R.id.card_manage_questions);
-        cardManageExams = findViewById(R.id.card_manage_exams);
         cardManageSigns = findViewById(R.id.card_manage_signs);
 
         // Click listener cho từng menu
