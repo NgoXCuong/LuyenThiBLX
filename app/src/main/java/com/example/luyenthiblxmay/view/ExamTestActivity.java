@@ -1,5 +1,6 @@
 package com.example.luyenthiblxmay.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.luyenthiblxmay.MainActivity;
 import com.example.luyenthiblxmay.R;
 import com.example.luyenthiblxmay.controller.ExamController;
 import com.example.luyenthiblxmay.model.ExamQuestion;
@@ -129,7 +131,7 @@ public class ExamTestActivity extends AppCompatActivity {
                 if (eq.isCorrect()) correctCount++;
             }
 
-            // Cập nhật số câu đúng vào ExamResult
+            // Cập nhật kết quả vào ExamResult
             ExamResult result = new ExamResult();
             result.setId((int) currentExamId);
             result.setUserId(currentUserId);
@@ -140,13 +142,21 @@ public class ExamTestActivity extends AppCompatActivity {
 
             examController.updateExamResult(result);
 
-            final int finalCorrectCount = correctCount; // final để dùng trong lambda
-            runOnUiThread(() -> {
-                Toast.makeText(this, "Kết thúc bài thi. Đúng: " + finalCorrectCount + "/" + examAnswers.size(), Toast.LENGTH_LONG).show();
-                finish();
-            });
+            int finalCorrectCount = correctCount;
 
+            runOnUiThread(() -> {
+                Toast.makeText(this,
+                        "Kết thúc bài thi. Đúng: " + finalCorrectCount + "/" + examAnswers.size(),
+                        Toast.LENGTH_LONG).show();
+
+                // 👇 Quay về MainActivity
+                Intent intent = new Intent(ExamTestActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish(); // đóng ExamTestActivity
+            });
         }).start();
     }
+
 
 }

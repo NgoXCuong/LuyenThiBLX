@@ -57,4 +57,12 @@
             android:layout_height="wrap_content"
             android:text="D. Đáp án D" />
     </RadioGroup>
+    <TextView
+        android:id="@+id/tvExplanation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"/>
 </LinearLayout>
