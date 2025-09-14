@@ -12,6 +12,8 @@ import com.example.luyenthiblxmay.R;
 import com.example.luyenthiblxmay.controller.QuestionController;
 import com.example.luyenthiblxmay.model.Question;
 
+import java.util.List;
+
 public class ModuleActivity extends AppCompatActivity {
 
     private ProgressBar progressBook, progressEthics, progressDrive, progressSigns, progressSimulation;
@@ -24,13 +26,13 @@ public class ModuleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_module);
 
-        controller = new QuestionController(this);
+        controller = new QuestionController(getApplication());
 
         // Back button
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        // Progress bars
+        // Progress bars & TextViews
         progressBook = findViewById(R.id.progressBarBook);
         txtProgressBook = findViewById(R.id.txtProgressBook);
 
@@ -46,44 +48,36 @@ public class ModuleActivity extends AppCompatActivity {
         progressSimulation = findViewById(R.id.progressBarSimulation);
         txtProgressSimulation = findViewById(R.id.txtProgressSimulation);
 
-        // Card click listeners → mở QuestionsByCategoryActivity theo module
-        findViewById(R.id.cardBook).setOnClickListener(v -> openQuestionActivity("KHÁI NIỆM VÀ QUY TẮC"));
-        findViewById(R.id.cardEthics).setOnClickListener(v -> openQuestionActivity("Văn hóa và đạo đức lái xe"));
-        findViewById(R.id.cardDrive).setOnClickListener(v -> openQuestionActivity("Kỹ thuật lái xe"));
-        findViewById(R.id.cardSigns).setOnClickListener(v -> openQuestionActivity("Biển báo"));
+        // Quan sát LiveData cho từng category
+        observeCategoryProgress("Khai niem va quy tac", progressBook, txtProgressBook);
+        observeCategoryProgress("Van hoa va dao duc lai xe", progressEthics, txtProgressEthics);
+        observeCategoryProgress("Ky thuat lai xe", progressDrive, txtProgressDrive);
+        observeCategoryProgress("Bien bao", progressSigns, txtProgressSigns);
+        observeCategoryProgress("Sa hinh", progressSimulation, txtProgressSimulation);
+
+        // Card click listeners → mở QuestionsActivity theo module
+        findViewById(R.id.cardBook).setOnClickListener(v -> openQuestionActivity("Khai niem va quy tac"));
+        findViewById(R.id.cardEthics).setOnClickListener(v -> openQuestionActivity("Van hoa va dao duc lai xe"));
+        findViewById(R.id.cardDrive).setOnClickListener(v -> openQuestionActivity("Ky thuat lai xe"));
+        findViewById(R.id.cardSigns).setOnClickListener(v -> openQuestionActivity("Bien bao"));
         findViewById(R.id.cardSimulation).setOnClickListener(v -> openQuestionActivity("Sa hinh"));
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Cập nhật progress động từng category
-        updateCategoryProgress("KHÁI NIỆM VÀ QUY TẮC", progressBook, txtProgressBook);
-        updateCategoryProgress("Văn hóa và đạo đức lái xe", progressEthics, txtProgressEthics);
-        updateCategoryProgress("Kỹ thuật lái xe", progressDrive, txtProgressDrive);
-        updateCategoryProgress("Biển báo", progressSigns, txtProgressSigns);
-        updateCategoryProgress("Sa hinh", progressSimulation, txtProgressSimulation);
-    }
-
-    private void updateCategoryProgress(String category, ProgressBar progressBar, TextView textView) {
-        controller.getQuestionsByCategory(category, questions -> {
+    // Quan sát LiveData, tự update progress khi dữ liệu thay đổi
+    private void observeCategoryProgress(String category, ProgressBar progressBar, TextView textView) {
+        controller.getQuestionsByCategory(category).observe(this, questions -> {
             int done = 0;
             for (Question q : questions) {
                 if (q.isAnswered()) done++;
             }
-
-            final int totalQuestions = questions.size();
-            final int doneCount = done;
-
-            runOnUiThread(() -> {
-                progressBar.setMax(totalQuestions);
-                progressBar.setProgress(doneCount);
-                textView.setText(doneCount + "/" + totalQuestions);
-            });
+            int total = questions.size();
+            progressBar.setMax(total);
+            progressBar.setProgress(done);
+            textView.setText(done + "/" + total);
         });
     }
 
-    // ✅ Mở Activity hiển thị câu hỏi theo category
+    // Mở Activity hiển thị câu hỏi theo category
     private void openQuestionActivity(String category) {
         Intent intent = new Intent(this, QuestionsActivity.class);
         intent.putExtra("category", category);

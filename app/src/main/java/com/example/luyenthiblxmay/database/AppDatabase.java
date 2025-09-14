@@ -42,7 +42,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                                     context.getApplicationContext(),
                                     AppDatabase.class,
-                                    "user_database"
+                                    "thi_blx_db"
                             )
                             .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                             .addCallback(new Callback() {

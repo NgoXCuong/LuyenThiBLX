@@ -12,7 +12,7 @@ import java.util.Map;
 @Entity(tableName = "questions")
 public class Question {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String question;

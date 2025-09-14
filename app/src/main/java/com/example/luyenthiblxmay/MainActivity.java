@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                        AppDatabase.class, "user_database")
+                        AppDatabase.class, "thi_blx_db")
                 .allowMainThreadQueries() // ⚠️ chỉ dùng cho test, thực tế nên dùng AsyncTask/Executor
                 .build();
 

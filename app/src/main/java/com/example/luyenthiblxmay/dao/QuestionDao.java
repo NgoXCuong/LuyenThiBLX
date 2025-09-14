@@ -1,5 +1,6 @@
 package com.example.luyenthiblxmay.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Dao
 public interface QuestionDao {
+
     @Insert
     void insert(Question question);
 
@@ -26,8 +28,8 @@ public interface QuestionDao {
     void deleteAll();
 
     @Query("SELECT * FROM questions ORDER BY id ASC")
-    List<Question> getAllQuestions();
+    LiveData<List<Question>> getAllQuestions();
 
     @Query("SELECT * FROM questions WHERE category = :category")
-    List<Question> getQuestionsByCategory(String category);
+    LiveData<List<Question>> getQuestionsByCategory(String category);
 }

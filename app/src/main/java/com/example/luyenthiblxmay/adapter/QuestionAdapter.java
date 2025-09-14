@@ -56,29 +56,56 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             holder.imgQuestion.setVisibility(View.GONE);
         }
 
-        // Set đáp án
+        // Set đáp án linh hoạt
         Map<String, String> options = question.getOptions();
         if (options != null) {
-            holder.rbA.setText("A. " + options.get("A"));
-            holder.rbB.setText("B. " + options.get("B"));
-            holder.rbC.setText("C. " + options.get("C"));
-            holder.rbD.setText("D. " + options.get("D"));
+            // Option A
+            if (options.containsKey("A") && !options.get("A").isEmpty()) {
+                holder.rbA.setText("A. " + options.get("A"));
+                holder.rbA.setVisibility(View.VISIBLE);
+            } else {
+                holder.rbA.setVisibility(View.GONE);
+            }
+
+            // Option B
+            if (options.containsKey("B") && !options.get("B").isEmpty()) {
+                holder.rbB.setText("B. " + options.get("B"));
+                holder.rbB.setVisibility(View.VISIBLE);
+            } else {
+                holder.rbB.setVisibility(View.GONE);
+            }
+
+            // Option C
+            if (options.containsKey("C") && !options.get("C").isEmpty()) {
+                holder.rbC.setText("C. " + options.get("C"));
+                holder.rbC.setVisibility(View.VISIBLE);
+            } else {
+                holder.rbC.setVisibility(View.GONE);
+            }
+
+            // Option D
+            if (options.containsKey("D") && !options.get("D").isEmpty()) {
+                holder.rbD.setText("D. " + options.get("D"));
+                holder.rbD.setVisibility(View.VISIBLE);
+            } else {
+                holder.rbD.setVisibility(View.GONE);
+            }
         }
 
         // Nếu đã chọn đáp án thì hiển thị lại
         if (question.getSelectedAnswer() != null) {
             switch (question.getSelectedAnswer()) {
                 case "A":
-                    holder.radioGroup.check(holder.rbA.getId());
+                    if (holder.rbA.getVisibility() == View.VISIBLE) holder.radioGroup.check(holder.rbA.getId());
                     break;
                 case "B":
-                    holder.radioGroup.check(holder.rbB.getId());
+                    if (holder.rbB.getVisibility() == View.VISIBLE) holder.radioGroup.check(holder.rbB.getId());
                     break;
                 case "C":
-                    holder.radioGroup.check(holder.rbC.getId());
+                    if (holder.rbC.getVisibility() == View.VISIBLE) holder.radioGroup.check(holder.rbC.getId());
                     break;
                 case "D":
-                    holder.radioGroup.check(holder.rbD.getId());
+                    if (holder.rbD.getVisibility() == View.VISIBLE) holder.radioGroup.check(holder.rbD.getId());
                     break;
             }
         } else {
@@ -98,6 +125,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

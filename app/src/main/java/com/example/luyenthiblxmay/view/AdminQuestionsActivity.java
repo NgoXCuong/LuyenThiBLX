@@ -17,7 +17,6 @@ import com.example.luyenthiblxmay.controller.QuestionController;
 import com.example.luyenthiblxmay.model.Question;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AdminQuestionsActivity extends AppCompatActivity {
@@ -35,31 +34,26 @@ public class AdminQuestionsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewQuestions);
         btnAddQuestion = findViewById(R.id.btnAddQuestion);
 
-        questionController = new QuestionController(this);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdminQuestionsAdapter();
         recyclerView.setAdapter(adapter);
+
+        // Khởi tạo controller kiểu LiveData
+        questionController = new QuestionController(getApplication());
+
+        // Quan sát LiveData, RecyclerView tự cập nhật
+        questionController.getAllQuestions().observe(this, questions -> {
+            adapter.setQuestions(questions);
+        });
 
         // Listener sửa
         adapter.setOnEditListener(this::showAddEditDialog);
 
         // Listener xóa
-        adapter.setOnDeleteListener(question -> {
-            questionController.deleteQuestion(question);
-            loadQuestions();
-        });
+        adapter.setOnDeleteListener(question -> questionController.deleteQuestion(question));
 
         // Thêm mới
         btnAddQuestion.setOnClickListener(v -> showAddEditDialog(null));
-
-        loadQuestions();
-    }
-
-    private void loadQuestions() {
-        questionController.getAllQuestions(questions -> {
-            runOnUiThread(() -> adapter.setQuestions(questions));
-        });
     }
 
     private void showAddEditDialog(@Nullable Question question) {
@@ -128,8 +122,7 @@ public class AdminQuestionsActivity extends AppCompatActivity {
 
                         questionController.updateQuestion(question);
                     }
-
-                    loadQuestions();
+                    // Không cần gọi loadQuestions(), LiveData tự cập nhật
                 })
                 .setNegativeButton("Hủy", null)
                 .create();

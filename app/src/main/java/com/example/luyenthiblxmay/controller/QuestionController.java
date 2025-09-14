@@ -1,9 +1,11 @@
 package com.example.luyenthiblxmay.controller;
 
-import android.content.Context;
+import android.app.Application;
 
-import com.example.luyenthiblxmay.database.AppDatabase;
+import androidx.lifecycle.LiveData;
+
 import com.example.luyenthiblxmay.dao.QuestionDao;
+import com.example.luyenthiblxmay.database.AppDatabase;
 import com.example.luyenthiblxmay.model.Question;
 
 import java.util.List;
@@ -14,24 +16,23 @@ public class QuestionController {
     private final QuestionDao questionDao;
     private final ExecutorService executorService;
 
-    public interface Callback<T> {
-        void onResult(T result);
-    }
-
-    public QuestionController(Context context) {
-        AppDatabase db = AppDatabase.getDatabase(context);
+    public QuestionController(Application application) {
+        AppDatabase db = AppDatabase.getDatabase(application);
         questionDao = db.questionDao();
         executorService = Executors.newSingleThreadExecutor();
     }
 
+    // Thêm
     public void addQuestion(Question question) {
         executorService.execute(() -> questionDao.insert(question));
     }
 
+    // Cập nhật
     public void updateQuestion(Question question) {
         executorService.execute(() -> questionDao.update(question));
     }
 
+    // Xóa
     public void deleteQuestion(Question question) {
         executorService.execute(() -> questionDao.delete(question));
     }
@@ -40,19 +41,13 @@ public class QuestionController {
         executorService.execute(questionDao::deleteAll);
     }
 
-    // ✅ Lấy tất cả question (async)
-    public void getAllQuestions(Callback<List<Question>> callback) {
-        executorService.execute(() -> {
-            List<Question> questions = questionDao.getAllQuestions();
-            callback.onResult(questions);
-        });
+    // Lấy tất cả câu hỏi (LiveData)
+    public LiveData<List<Question>> getAllQuestions() {
+        return questionDao.getAllQuestions();
     }
 
-    // ✅ Lấy question theo category (async)
-    public void getQuestionsByCategory(String category, Callback<List<Question>> callback) {
-        executorService.execute(() -> {
-            List<Question> questions = questionDao.getQuestionsByCategory(category);
-            callback.onResult(questions);
-        });
+    // Lấy theo category
+    public LiveData<List<Question>> getQuestionsByCategory(String category) {
+        return questionDao.getQuestionsByCategory(category);
     }
 }

@@ -33,18 +33,16 @@ public class QuestionsActivity extends AppCompatActivity {
         // Nhận category từ Intent
         String category = getIntent().getStringExtra("category");
 
-        questionController = new QuestionController(this);
+        // Khởi tạo QuestionController dùng LiveData
+        questionController = new QuestionController(getApplication());
 
         // Adapter khởi tạo với list rỗng
         adapter = new QuestionAdapter(this, new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
-        // Lấy danh sách câu hỏi theo category (async)
-        questionController.getQuestionsByCategory(category, result -> {
-            runOnUiThread(() -> {
-                adapter.setQuestions(result);
-                adapter.notifyDataSetChanged();
-            });
+        // Quan sát LiveData theo category
+        questionController.getQuestionsByCategory(category).observe(this, questions -> {
+            adapter.setQuestions(questions); // set list mới cho adapter
         });
 
         backButton.setOnClickListener(v -> finish());
