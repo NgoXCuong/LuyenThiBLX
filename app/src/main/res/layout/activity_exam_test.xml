@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvQuestionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Câu 1/25"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nội dung câu hỏi"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"/>
+
+    <RadioGroup
+        android:id="@+id/rgOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp">
+
+        <RadioButton
+            android:id="@+id/rbOptionA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A. "/>
+
+        <RadioButton
+            android:id="@+id/rbOptionB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B. "/>
+
+        <RadioButton
+            android:id="@+id/rbOptionC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C. "/>
+
+        <RadioButton
+            android:id="@+id/rbOptionD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D. "/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Câu tiếp theo"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

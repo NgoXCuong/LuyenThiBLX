@@ -10,20 +10,24 @@ import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.luyenthiblxmay.dao.QuestionDao;
-import com.example.luyenthiblxmay.dao.TipsDao;
-import com.example.luyenthiblxmay.dao.UserDao;
-import com.example.luyenthiblxmay.model.Question;
-import com.example.luyenthiblxmay.model.Tips;
-import com.example.luyenthiblxmay.model.User;
+import com.example.luyenthiblxmay.dao.*;
+import com.example.luyenthiblxmay.model.*;
 import com.example.luyenthiblxmay.utils.OptionsConverter;
 import com.example.luyenthiblxmay.utils.PasswordUtils;
 
 import java.util.concurrent.Executors;
 
 @Database(
-        entities = {User.class, Tips.class, Question.class},
-        version = 3, // tăng version lên 3
+        entities = {
+                User.class,
+                Tips.class,
+                Question.class,
+                ExamResult.class,
+                ExamQuestion.class,
+                UserQuestion.class,
+                UserLearningProgress.class
+        },
+        version = 5,
         exportSchema = false
 )
 @TypeConverters({AppDatabase.Converters.class, OptionsConverter.class})
@@ -34,6 +38,9 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract TipsDao tipsDao();
     public abstract QuestionDao questionDao();
+    public abstract ExamResultDao examResultDao();
+    public abstract ExamQuestionDao examQuestionDao();
+    public abstract UserQuestionDao userQuestionDao();
 
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -42,9 +49,9 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                                     context.getApplicationContext(),
                                     AppDatabase.class,
-                                    "thi_blx_db"
+                                    "app_thi_blx"
                             )
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                             .addCallback(new Callback() {
                                 @Override
                                 public void onOpen(@NonNull SupportSQLiteDatabase db) {
@@ -74,7 +81,7 @@ public abstract class AppDatabase extends RoomDatabase {
         INSTANCE = null;
     }
 
-    // Converters để Room lưu Date
+    // Converters
     public static class Converters {
         @androidx.room.TypeConverter
         public static java.util.Date fromTimestamp(Long value) {
@@ -105,13 +112,73 @@ public abstract class AppDatabase extends RoomDatabase {
             database.execSQL("CREATE TABLE IF NOT EXISTS `questions` (" +
                     "`id` INTEGER PRIMARY KEY NOT NULL, " +
                     "`question` TEXT, " +
-                    "`options` TEXT, " + // lưu Map dưới dạng JSON String
+                    "`options` TEXT, " +
                     "`answer` TEXT, " +
                     "`explanation` TEXT, " +
                     "`category` TEXT, " +
                     "`image` TEXT, " +
                     "`isAnswered` INTEGER NOT NULL DEFAULT 0, " +
                     "`selectedAnswer` TEXT)");
+        }
+    };
+
+    // Migration 3->4: tạo bảng ExamResult và ExamQuestion
+    // Migration 3->4: tạo bảng ExamResult và ExamQuestion
+    static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            // Tạo ExamResult trước, vì ExamQuestion FK vào nó
+            database.execSQL("CREATE TABLE IF NOT EXISTS `exam_result` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`userId` INTEGER NOT NULL, " +
+                    "`totalQuestions` INTEGER NOT NULL, " +
+                    "`correctAnswers` INTEGER NOT NULL, " +
+                    "`takenAt` INTEGER NOT NULL, " +
+                    "`category` TEXT, " +
+                    "FOREIGN KEY(`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_exam_result_userId` ON `exam_result`(`userId`)");
+
+            // Tạo ExamQuestion sau, vì FK vào ExamResult và Question
+            database.execSQL("CREATE TABLE IF NOT EXISTS `exam_question` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`examId` INTEGER NOT NULL, " +
+                    "`questionId` INTEGER NOT NULL, " +
+                    "`selectedAnswer` TEXT, " +
+                    "`isCorrect` INTEGER NOT NULL DEFAULT 0, " +
+                    "FOREIGN KEY(`examId`) REFERENCES `exam_result`(`id`) ON DELETE CASCADE, " +
+                    "FOREIGN KEY(`questionId`) REFERENCES `questions`(`id`) ON DELETE CASCADE)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_exam_question_examId` ON `exam_question`(`examId`)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_exam_question_questionId` ON `exam_question`(`questionId`)");
+        }
+    };
+
+
+    // Migration 4->5: tạo bảng UserQuestion và UserLearningProgress + index
+    static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            // UserQuestion
+            database.execSQL("CREATE TABLE IF NOT EXISTS `user_question` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`userId` INTEGER NOT NULL, " +
+                    "`questionId` INTEGER NOT NULL, " +
+                    "`isAnswered` INTEGER NOT NULL DEFAULT 0, " +
+                    "`selectedAnswer` TEXT, " +
+                    "`answeredAt` INTEGER, " +
+                    "FOREIGN KEY(`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE, " +
+                    "FOREIGN KEY(`questionId`) REFERENCES `questions`(`id`) ON DELETE CASCADE)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_user_question_userId` ON `user_question`(`userId`)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_user_question_questionId` ON `user_question`(`questionId`)");
+
+            // UserLearningProgress
+            database.execSQL("CREATE TABLE IF NOT EXISTS `user_learning_progress` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`userId` INTEGER NOT NULL, " +
+                    "`category` TEXT, " +
+                    "`lastQuestionId` INTEGER, " +
+                    "`updatedAt` INTEGER, " +
+                    "FOREIGN KEY(`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE)");
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_user_learning_progress_userId` ON `user_learning_progress`(`userId`)");
         }
     };
 }

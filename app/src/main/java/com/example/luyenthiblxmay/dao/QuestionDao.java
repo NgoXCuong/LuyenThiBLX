@@ -32,4 +32,7 @@ public interface QuestionDao {
 
     @Query("SELECT * FROM questions WHERE category = :category")
     LiveData<List<Question>> getQuestionsByCategory(String category);
+
+    @Query("SELECT * FROM questions ORDER BY RANDOM() LIMIT 25")
+    LiveData<List<Question>> getRandomQuestions();
 }

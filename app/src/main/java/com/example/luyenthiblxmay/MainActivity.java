@@ -17,6 +17,7 @@ import androidx.room.Room;
 import com.example.luyenthiblxmay.dao.UserDao;
 import com.example.luyenthiblxmay.database.AppDatabase;
 import com.example.luyenthiblxmay.model.User;
+import com.example.luyenthiblxmay.view.ExamTestActivity;
 import com.example.luyenthiblxmay.view.LoginActivity;
 import com.example.luyenthiblxmay.view.ModuleActivity;
 import com.example.luyenthiblxmay.view.TipsActivity;
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         LinearLayout layoutMeoHocTap = findViewById(R.id.layoutMeoHocTap);
-        LinearLayout layoutHocLyThuet = findViewById(R.id.layoutHocLyThuyet);
-
+        LinearLayout layoutHocLyThuyet = findViewById(R.id.layoutHocLyThuyet);
+        LinearLayout layoutThiThu = findViewById(R.id.layoutThithu);
 
         layoutMeoHocTap.setOnClickListener(v -> {
             // Chuyển sang trang khác
@@ -44,15 +45,21 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        layoutHocLyThuet.setOnClickListener(v -> {
+        layoutHocLyThuyet.setOnClickListener(v -> {
             // Chuyển sang trang khác
             Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
             startActivity(intent);
         });
 
+        layoutThiThu.setOnClickListener(v -> {
+            // Chuyển sang trang khác
+            Intent intent = new Intent(MainActivity.this, ExamTestActivity.class);
+            startActivity(intent);
+        });
+
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                        AppDatabase.class, "thi_blx_db")
+                        AppDatabase.class, "app_thi_blx")
                 .allowMainThreadQueries() // ⚠️ chỉ dùng cho test, thực tế nên dùng AsyncTask/Executor
                 .build();
 
