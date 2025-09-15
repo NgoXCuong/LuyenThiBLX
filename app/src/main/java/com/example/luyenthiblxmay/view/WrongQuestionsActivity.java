@@ -1,6 +1,7 @@
 package com.example.luyenthiblxmay.view;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,10 @@ public class WrongQuestionsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewWrongQuestions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Nút back
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         questionList.addAll(WrongQuestionCache.getWrongQuestions());
         if (questionList.isEmpty()) {

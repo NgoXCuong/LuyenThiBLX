@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -31,7 +30,20 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <!-- Thêm đồng hồ đếm ngược -->
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="19:00"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
     </RelativeLayout>
+
 
     <!-- Divider -->
     <View
@@ -111,7 +123,6 @@
                     android:layout_height="wrap_content"
                     android:text="D. " />
             </RadioGroup>
-
         </LinearLayout>
     </ScrollView>
 
@@ -135,13 +146,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Câu tiếp theo" />
-        <Button
-            android:id="@+id/btnRetryWrong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Làm lại câu sai"
-            android:layout_marginStart="16dp" />
-
     </LinearLayout>
 
 </LinearLayout>
