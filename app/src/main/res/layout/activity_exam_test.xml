@@ -135,6 +135,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Câu tiếp theo" />
+        <Button
+            android:id="@+id/btnRetryWrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Làm lại câu sai"
+            android:layout_marginStart="16dp" />
+
     </LinearLayout>
 
 </LinearLayout>

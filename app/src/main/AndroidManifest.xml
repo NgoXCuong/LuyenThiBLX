@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LuyenThiBLXMay">
         <activity
+            android:name=".view.WrongQuestionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ExamTestActivity"
             android:exported="false" />
         <activity

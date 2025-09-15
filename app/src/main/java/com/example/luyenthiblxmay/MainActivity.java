@@ -21,6 +21,7 @@ import com.example.luyenthiblxmay.view.ExamTestActivity;
 import com.example.luyenthiblxmay.view.LoginActivity;
 import com.example.luyenthiblxmay.view.ModuleActivity;
 import com.example.luyenthiblxmay.view.TipsActivity;
+import com.example.luyenthiblxmay.view.WrongQuestionsActivity;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout layoutMeoHocTap = findViewById(R.id.layoutMeoHocTap);
         LinearLayout layoutHocLyThuyet = findViewById(R.id.layoutHocLyThuyet);
         LinearLayout layoutThiThu = findViewById(R.id.layoutThithu);
+        LinearLayout layoutCauSai = findViewById(R.id.layoutCauSai);
+
 
         layoutMeoHocTap.setOnClickListener(v -> {
             // Chuyển sang trang khác
@@ -54,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
         layoutThiThu.setOnClickListener(v -> {
             // Chuyển sang trang khác
             Intent intent = new Intent(MainActivity.this, ExamTestActivity.class);
+            startActivity(intent);
+        });
+
+        layoutCauSai.setOnClickListener(v -> {
+            // Chuyển sang trang khác
+            Intent intent = new Intent(MainActivity.this, WrongQuestionsActivity.class);
             startActivity(intent);
         });
 
