@@ -52,9 +52,6 @@ public class TipsActivity extends AppCompatActivity {
         tipsController.getAllTips().observe(this, tips -> {
             if (tips == null || tips.isEmpty()) {
                 List<Tips> sample = new ArrayList<>();
-                sample.add(new Tips("Quan sát kỹ biển báo", "Đọc kỹ biển báo để tránh nhầm lẫn."));
-                sample.add(new Tips("Chú ý tốc độ", "Không vượt quá tốc độ cho phép, đặc biệt trong khu dân cư."));
-                sample.add(new Tips("Luôn thắt dây an toàn", "Bảo vệ bản thân và tuân thủ luật."));
                 tipsController.insertAll(sample);
             }
         });
