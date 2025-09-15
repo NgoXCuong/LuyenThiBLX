@@ -1,19 +1,18 @@
 package com.example.luyenthiblxmay.view;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.luyenthiblxmay.MainActivity;
 import com.example.luyenthiblxmay.R;
@@ -22,6 +21,8 @@ import com.example.luyenthiblxmay.model.ExamQuestion;
 import com.example.luyenthiblxmay.model.ExamResult;
 import com.example.luyenthiblxmay.model.Question;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class ExamTestActivity extends AppCompatActivity {
 
     private TextView tvQuestionNumber, tvQuestion;
     private RadioGroup rgOptions;
-    private Button btnNext;
+    private Button btnNext, btnSubmit;
 
     private ExamController examController;
     private List<Question> questionList = new ArrayList<>();
@@ -39,6 +40,7 @@ public class ExamTestActivity extends AppCompatActivity {
     private int currentIndex = 0;
     private long currentExamId;
     private int currentUserId = 1; // user hiện tại
+    private int correctCount = 0;  // tổng số câu đúng
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class ExamTestActivity extends AppCompatActivity {
         tvQuestion = findViewById(R.id.tvQuestion);
         rgOptions = findViewById(R.id.rgOptions);
         btnNext = findViewById(R.id.btnNext);
+        btnSubmit = findViewById(R.id.btnSubmit);
 
         // Nút back
         ImageView backButton = findViewById(R.id.backButton);
@@ -84,23 +87,75 @@ public class ExamTestActivity extends AppCompatActivity {
                 finishExam();
             }
         });
+
+        // 4️⃣ Nút Nộp bài
+        btnSubmit.setOnClickListener(v -> {
+            saveAnswer();
+            finishExam();
+        });
     }
 
     private void showQuestion(int index) {
         Question q = questionList.get(index);
+
         tvQuestionNumber.setText("Câu " + (index + 1) + "/" + questionList.size());
         tvQuestion.setText(q.getQuestion());
 
+        // Hiển thị ảnh nếu có
+        ImageView imgQuestion = findViewById(R.id.imgQuestion);
+        if (q.getImage() != null && !q.getImage().isEmpty()) {
+            try {
+                InputStream is = getAssets().open(q.getImage());
+                Drawable drawable = Drawable.createFromStream(is, null);
+                imgQuestion.setImageDrawable(drawable);
+                imgQuestion.setVisibility(View.VISIBLE);
+                is.close();
+            } catch (IOException e) {
+                imgQuestion.setVisibility(View.GONE);
+                e.printStackTrace();
+            }
+        } else {
+            imgQuestion.setVisibility(View.GONE);
+        }
+
+        // Reset tất cả option về GONE
+        RadioButton rbA = findViewById(R.id.rbOptionA);
+        RadioButton rbB = findViewById(R.id.rbOptionB);
+        RadioButton rbC = findViewById(R.id.rbOptionC);
+        RadioButton rbD = findViewById(R.id.rbOptionD);
+
+        rbA.setVisibility(View.GONE);
+        rbB.setVisibility(View.GONE);
+        rbC.setVisibility(View.GONE);
+        rbD.setVisibility(View.GONE);
+
+        // Hiển thị các đáp án có trong options
         Map<String, String> options = q.getOptions();
-        ((RadioButton) findViewById(R.id.rbOptionA)).setText("A. " + options.get("A"));
-        ((RadioButton) findViewById(R.id.rbOptionB)).setText("B. " + options.get("B"));
-        ((RadioButton) findViewById(R.id.rbOptionC)).setText("C. " + options.get("C"));
-        ((RadioButton) findViewById(R.id.rbOptionD)).setText("D. " + options.get("D"));
+        if (options != null) {
+            if (options.get("A") != null && !options.get("A").isEmpty()) {
+                rbA.setText("A. " + options.get("A"));
+                rbA.setVisibility(View.VISIBLE);
+            }
+            if (options.get("B") != null && !options.get("B").isEmpty()) {
+                rbB.setText("B. " + options.get("B"));
+                rbB.setVisibility(View.VISIBLE);
+            }
+            if (options.get("C") != null && !options.get("C").isEmpty()) {
+                rbC.setText("C. " + options.get("C"));
+                rbC.setVisibility(View.VISIBLE);
+            }
+            if (options.get("D") != null && !options.get("D").isEmpty()) {
+                rbD.setText("D. " + options.get("D"));
+                rbD.setVisibility(View.VISIBLE);
+            }
+        }
 
         rgOptions.clearCheck();
     }
 
     private void saveAnswer() {
+        if (currentIndex >= questionList.size()) return;
+
         Question q = questionList.get(currentIndex);
         int selectedId = rgOptions.getCheckedRadioButtonId();
         String selected = "";
@@ -110,6 +165,7 @@ public class ExamTestActivity extends AppCompatActivity {
         else if (selectedId == R.id.rbOptionD) selected = "D";
 
         boolean correct = selected.equals(q.getAnswer());
+        if (correct) correctCount++;
 
         ExamQuestion eq = new ExamQuestion();
         eq.setExamId((int) currentExamId);
@@ -121,42 +177,57 @@ public class ExamTestActivity extends AppCompatActivity {
     }
 
     private void finishExam() {
+        // ✅ Hiện dialog kết quả ngay lập tức
+        runOnUiThread(this::showResultDialog);
+
+        // ✅ Lưu kết quả vào DB ở background thread
         new Thread(() -> {
-            // Lưu tất cả câu trả lời
-            examController.insertExamQuestions(examAnswers);
+            try {
+                // Lưu các câu trả lời
+                examController.insertExamQuestions(examAnswers);
 
-            // Tính số câu đúng
-            int correctCount = 0;
-            for (ExamQuestion eq : examAnswers) {
-                if (eq.isCorrect()) correctCount++;
+                // Tạo ExamResult để update
+                ExamResult result = new ExamResult();
+                result.setId((int) currentExamId);
+                result.setUserId(currentUserId);
+                result.setTotalQuestions(examAnswers.size());
+                result.setCorrectAnswers(correctCount);
+                result.setTakenAt(System.currentTimeMillis());
+                result.setCategory("A1");
+
+                // Update ExamResult
+                examController.updateExamResult(result);
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            // Cập nhật kết quả vào ExamResult
-            ExamResult result = new ExamResult();
-            result.setId((int) currentExamId);
-            result.setUserId(currentUserId);
-            result.setTotalQuestions(examAnswers.size());
-            result.setCorrectAnswers(correctCount);
-            result.setTakenAt(System.currentTimeMillis());
-            result.setCategory("A1");
-
-            examController.updateExamResult(result);
-
-            int finalCorrectCount = correctCount;
-
-            runOnUiThread(() -> {
-                Toast.makeText(this,
-                        "Kết thúc bài thi. Đúng: " + finalCorrectCount + "/" + examAnswers.size(),
-                        Toast.LENGTH_LONG).show();
-
-                // 👇 Quay về MainActivity
-                Intent intent = new Intent(ExamTestActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish(); // đóng ExamTestActivity
-            });
         }).start();
     }
 
+
+    // 🔔 Dialog hiển thị kết quả
+    private void showResultDialog() {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Kết quả bài thi");
+            builder.setMessage("Bạn trả lời đúng: " + correctCount + "/" + examAnswers.size());
+
+            builder.setPositiveButton("Thoát", (dialog, which) -> {
+                Intent intent = new Intent(ExamTestActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            });
+
+            builder.setNegativeButton("Xem lại", (dialog, which) -> dialog.dismiss());
+            builder.setCancelable(false);
+            Log.d("ExamFinish", "correctCount=" + correctCount + ", total=" + examAnswers.size());
+
+            builder.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

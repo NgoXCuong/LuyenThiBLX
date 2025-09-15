@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    android:background="#FFFFFF">
 
     <!-- Header -->
     <RelativeLayout
@@ -37,62 +37,104 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#404040" />
+        android:background="#CCCCCC" />
 
-    <TextView
-        android:id="@+id/tvQuestionNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Câu 1/25"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
+    <!-- Nội dung chính -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tvQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nội dung câu hỏi"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/rgOptions"
+            <!-- Số thứ tự câu hỏi -->
+            <TextView
+                android:id="@+id/tvQuestionNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Câu 1/25"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Nội dung câu hỏi -->
+            <TextView
+                android:id="@+id/tvQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nội dung câu hỏi"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Ảnh minh họa -->
+            <ImageView
+                android:id="@+id/imgQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="12dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:visibility="gone" />
+
+            <!-- Nhóm đáp án -->
+            <RadioGroup
+                android:id="@+id/rgOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rbOptionA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A. " />
+
+                <RadioButton
+                    android:id="@+id/rbOptionB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B. " />
+
+                <RadioButton
+                    android:id="@+id/rbOptionC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="C. " />
+
+                <RadioButton
+                    android:id="@+id/rbOptionD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="D. " />
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Nhóm nút điều khiển -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="12dp">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="12dp">
 
-        <RadioButton
-            android:id="@+id/rbOptionA"
+        <Button
+            android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A. "/>
+            android:text="Nộp bài"
+            android:layout_marginEnd="16dp" />
 
-        <RadioButton
-            android:id="@+id/rbOptionB"
+        <Button
+            android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="B. "/>
-
-        <RadioButton
-            android:id="@+id/rbOptionC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="C. "/>
-
-        <RadioButton
-            android:id="@+id/rbOptionD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="D. "/>
-
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Câu tiếp theo"
-        android:layout_marginTop="16dp"/>
+            android:text="Câu tiếp theo" />
+    </LinearLayout>
 
 </LinearLayout>
