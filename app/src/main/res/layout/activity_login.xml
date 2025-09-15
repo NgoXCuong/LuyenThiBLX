@@ -136,19 +136,20 @@
                 </LinearLayout>
 
                 <!-- Nút đăng nhập -->
+
+                <!-- Progress bar -->
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Đăng nhập"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/gradient_btn"
                     android:layout_marginBottom="16dp"
-                    android:elevation="4dp" />
+                    android:background="@drawable/gradient_btn"
+                    android:elevation="4dp"
+                    android:text="Đăng nhập"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                <!-- Progress bar -->
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="wrap_content"

@@ -176,58 +176,63 @@ public class ExamTestActivity extends AppCompatActivity {
         examAnswers.add(eq);
     }
 
+
     private void finishExam() {
-        // ✅ Hiện dialog kết quả ngay lập tức
         runOnUiThread(this::showResultDialog);
 
-        // ✅ Lưu kết quả vào DB ở background thread
+        // Lưu kết quả vào DB
         new Thread(() -> {
             try {
-                // Lưu các câu trả lời
-                examController.insertExamQuestions(examAnswers);
-
-                // Tạo ExamResult để update
+                // Tạo ExamResult
                 ExamResult result = new ExamResult();
-                result.setId((int) currentExamId);
                 result.setUserId(currentUserId);
                 result.setTotalQuestions(examAnswers.size());
                 result.setCorrectAnswers(correctCount);
                 result.setTakenAt(System.currentTimeMillis());
                 result.setCategory("A1");
 
-                // Update ExamResult
-                examController.updateExamResult(result);
+                // Insert ExamResult -> lấy ID mới
+                long newExamId = examController.insertExamResult(result);
+
+                // Gán examId cho tất cả câu trả lời
+                for (ExamQuestion answer : examAnswers) {
+                    answer.setExamId((int)newExamId);
+                }
+
+                // Insert câu trả lời
+                examController.insertExamQuestions(examAnswers);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
+
     }
 
 
-    // 🔔 Dialog hiển thị kết quả
+
     private void showResultDialog() {
         try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Kết quả bài thi");
-            builder.setMessage("Bạn trả lời đúng: " + correctCount + "/" + examAnswers.size());
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Kết quả bài thi")
+                    .setMessage("Bạn trả lời đúng: " + correctCount + "/" + examAnswers.size())
+                    .setCancelable(false)
+                    .setPositiveButton("Thoát", (d, which) -> {
+                        Intent intent = new Intent(ExamTestActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish(); // Chỉ finish ở đây
+                    })
+                    .setNegativeButton("Xem lại", (d, which) -> d.dismiss())
+                    .create();
 
-            builder.setPositiveButton("Thoát", (dialog, which) -> {
-                Intent intent = new Intent(ExamTestActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-            });
-
-            builder.setNegativeButton("Xem lại", (dialog, which) -> dialog.dismiss());
-            builder.setCancelable(false);
             Log.d("ExamFinish", "correctCount=" + correctCount + ", total=" + examAnswers.size());
-
-            builder.show();
+            dialog.show();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
 }

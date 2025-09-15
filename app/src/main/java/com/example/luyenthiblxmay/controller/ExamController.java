@@ -35,6 +35,11 @@ public class ExamController {
         executorService.execute(() -> examResultDao.insertExamResult(examResult));
     }
 
+    public long insertExamResult(ExamResult result) {
+        return examResultDao.insertExamResult(result); // Trả về ID mới
+    }
+
+
     // Cập nhật ExamResult (ví dụ cập nhật số câu đúng)
     public void updateExamResult(ExamResult examResult) {
         executorService.execute(() -> examResultDao.updateExamResult(examResult));
@@ -66,12 +71,12 @@ public class ExamController {
     }
 
     // insertExamResult
-    public long insertExamResult(ExamResult examResult) {
-        final long[] id = new long[1];
-        ExecutorService service = Executors.newSingleThreadExecutor();
-        service.submit(() -> id[0] = examResultDao.insertExamResult(examResult));
-        return id[0]; // lưu ý: chỉ dùng khi chạy thread đồng bộ
-    }
+//    public long insertExamResult(ExamResult examResult) {
+//        final long[] id = new long[1];
+//        ExecutorService service = Executors.newSingleThreadExecutor();
+//        service.submit(() -> id[0] = examResultDao.insertExamResult(examResult));
+//        return id[0]; // lưu ý: chỉ dùng khi chạy thread đồng bộ
+//    }
 
     // insertExamQuestions
     public void insertExamQuestions(List<ExamQuestion> examQuestions) {

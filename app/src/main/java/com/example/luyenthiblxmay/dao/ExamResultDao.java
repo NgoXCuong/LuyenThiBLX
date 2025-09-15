@@ -15,7 +15,8 @@ import java.util.List;
 public interface ExamResultDao {
 
     @Insert
-    long insertExamResult(ExamResult examResult);
+//    long insertExamResult(ExamResult examResult);
+    long insertExamResult(ExamResult result);
 
     @Update
     void updateExamResult(ExamResult examResult);
