@@ -3,7 +3,6 @@ package com.example.luyenthiblxmay.view;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -64,8 +63,10 @@ public class ExamTestActivity extends AppCompatActivity {
             examResult.setCorrectAnswers(0);
             examResult.setTakenAt(System.currentTimeMillis());
 
-            currentExamId = (int) examController.insertExamResultSync(examResult); // lưu int
+            // Chèn đồng bộ và lấy ID int
+            currentExamId = examController.insertExamResultSync(examResult);
 
+            // Load câu hỏi random trên UI thread
             runOnUiThread(() -> {
                 examController.getRandomQuestions().observe(ExamTestActivity.this, questions -> {
                     if (questions != null && !questions.isEmpty()) {
@@ -106,13 +107,13 @@ public class ExamTestActivity extends AppCompatActivity {
             try (InputStream is = getAssets().open(q.getImage())) {
                 Drawable drawable = Drawable.createFromStream(is, null);
                 imgQuestion.setImageDrawable(drawable);
-                imgQuestion.setVisibility(View.VISIBLE);
+                imgQuestion.setVisibility(ImageView.VISIBLE);
             } catch (IOException e) {
-                imgQuestion.setVisibility(View.GONE);
+                imgQuestion.setVisibility(ImageView.GONE);
                 e.printStackTrace();
             }
         } else {
-            imgQuestion.setVisibility(View.GONE);
+            imgQuestion.setVisibility(ImageView.GONE);
         }
 
         RadioButton rbA = findViewById(R.id.rbOptionA);
@@ -120,17 +121,17 @@ public class ExamTestActivity extends AppCompatActivity {
         RadioButton rbC = findViewById(R.id.rbOptionC);
         RadioButton rbD = findViewById(R.id.rbOptionD);
 
-        rbA.setVisibility(View.GONE);
-        rbB.setVisibility(View.GONE);
-        rbC.setVisibility(View.GONE);
-        rbD.setVisibility(View.GONE);
+        rbA.setVisibility(RadioButton.GONE);
+        rbB.setVisibility(RadioButton.GONE);
+        rbC.setVisibility(RadioButton.GONE);
+        rbD.setVisibility(RadioButton.GONE);
 
         Map<String, String> options = q.getOptions();
         if (options != null) {
-            if (options.get("A") != null) { rbA.setText("A. " + options.get("A")); rbA.setVisibility(View.VISIBLE);}
-            if (options.get("B") != null) { rbB.setText("B. " + options.get("B")); rbB.setVisibility(View.VISIBLE);}
-            if (options.get("C") != null) { rbC.setText("C. " + options.get("C")); rbC.setVisibility(View.VISIBLE);}
-            if (options.get("D") != null) { rbD.setText("D. " + options.get("D")); rbD.setVisibility(View.VISIBLE);}
+            if (options.get("A") != null) { rbA.setText("A. " + options.get("A")); rbA.setVisibility(RadioButton.VISIBLE);}
+            if (options.get("B") != null) { rbB.setText("B. " + options.get("B")); rbB.setVisibility(RadioButton.VISIBLE);}
+            if (options.get("C") != null) { rbC.setText("C. " + options.get("C")); rbC.setVisibility(RadioButton.VISIBLE);}
+            if (options.get("D") != null) { rbD.setText("D. " + options.get("D")); rbD.setVisibility(RadioButton.VISIBLE);}
         }
 
         rgOptions.clearCheck();
@@ -151,7 +152,7 @@ public class ExamTestActivity extends AppCompatActivity {
         if (correct) correctCount++;
 
         ExamQuestion eq = new ExamQuestion();
-        eq.setExamId(currentExamId); // int
+        eq.setExamId(currentExamId);
         eq.setQuestionId(q.getId());
         eq.setSelectedAnswer(selected);
         eq.setCorrect(correct);
@@ -159,80 +160,31 @@ public class ExamTestActivity extends AppCompatActivity {
         examAnswers.add(eq);
     }
 
-
     private void finishExam() {
         runOnUiThread(this::showResultDialog);
 
-<<<<<<< Updated upstream
-        // Lưu kết quả vào DB
         new Thread(() -> {
             try {
-                // Tạo ExamResult
-                ExamResult result = new ExamResult();
-=======
-        new Thread(() -> {
-            try {
+                // Gán examId cho tất cả câu trả lời (đã có currentExamId)
                 examController.insertExamQuestions(examAnswers);
 
+                // Cập nhật ExamResult
                 ExamResult result = new ExamResult();
                 result.setId(currentExamId);
->>>>>>> Stashed changes
                 result.setUserId(currentUserId);
                 result.setTotalQuestions(examAnswers.size());
                 result.setCorrectAnswers(correctCount);
                 result.setTakenAt(System.currentTimeMillis());
                 result.setCategory("A1");
 
-<<<<<<< Updated upstream
-                // Insert ExamResult -> lấy ID mới
-                long newExamId = examController.insertExamResult(result);
-
-                // Gán examId cho tất cả câu trả lời
-                for (ExamQuestion answer : examAnswers) {
-                    answer.setExamId((int)newExamId);
-                }
-
-                // Insert câu trả lời
-                examController.insertExamQuestions(examAnswers);
-=======
                 examController.updateExamResult(result);
->>>>>>> Stashed changes
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
-
     }
 
-<<<<<<< Updated upstream
-
-
-    private void showResultDialog() {
-        try {
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle("Kết quả bài thi")
-                    .setMessage("Bạn trả lời đúng: " + correctCount + "/" + examAnswers.size())
-                    .setCancelable(false)
-                    .setPositiveButton("Thoát", (d, which) -> {
-                        Intent intent = new Intent(ExamTestActivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish(); // Chỉ finish ở đây
-                    })
-                    .setNegativeButton("Xem lại", (d, which) -> d.dismiss())
-                    .create();
-
-            Log.d("ExamFinish", "correctCount=" + correctCount + ", total=" + examAnswers.size());
-            dialog.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-=======
     private void showResultDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Kết quả bài thi");
@@ -253,5 +205,4 @@ public class ExamTestActivity extends AppCompatActivity {
         builder.setCancelable(false);
         builder.show();
     }
->>>>>>> Stashed changes
 }
