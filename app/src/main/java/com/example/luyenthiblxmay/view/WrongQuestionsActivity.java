@@ -1,7 +1,9 @@
 package com.example.luyenthiblxmay.view;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,14 +36,18 @@ public class WrongQuestionsActivity extends AppCompatActivity {
         ImageView backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        questionList.addAll(WrongQuestionCache.getWrongQuestions());
-        if (questionList.isEmpty()) {
-            Toast.makeText(this, "Bạn không có câu sai nào!", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+        // TextView thông báo
+        TextView tvEmptyMessage = findViewById(R.id.tvEmptyMessage);
 
-        adapter = new WrongQuestionAdapter(this, questionList);
-        recyclerView.setAdapter(adapter);
+        questionList.addAll(WrongQuestionCache.getWrongQuestions());
+
+        if (questionList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            tvEmptyMessage.setVisibility(View.VISIBLE);
+        } else {
+            adapter = new WrongQuestionAdapter(this, questionList);
+            recyclerView.setAdapter(adapter);
+            tvEmptyMessage.setVisibility(View.GONE);
+        }
     }
 }

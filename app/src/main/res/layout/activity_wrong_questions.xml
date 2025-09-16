@@ -43,4 +43,15 @@
         android:layout_weight="1"
         android:paddingTop="8dp"
         android:clipToPadding="false"/>
+    <!-- TextView hiển thị khi không có dữ liệu -->
+    <TextView
+        android:id="@+id/tvEmptyMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bạn không có câu sai nào!"
+        android:textSize="26sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="26dp"/>
 </LinearLayout>

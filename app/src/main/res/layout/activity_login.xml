@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LUYỆN THI TRẮC NGHIỆM A1"
+                android:text="LUYỆN THI BẰNG LÁI XE MÁY"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -209,7 +209,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="© 2025 Ứng dụng thi bằng lái xe A1\nPhiên bản 1.0"
+            android:text="© 2025 Ứng dụng luyện thi bằng lái xe máy\nPhiên bản 1.0"
             android:textSize="12sp"
             android:textColor="@color/textSecondary"
             android:gravity="center"
