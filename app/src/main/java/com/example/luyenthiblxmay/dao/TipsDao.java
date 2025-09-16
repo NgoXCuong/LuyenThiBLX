@@ -30,7 +30,7 @@ public interface TipsDao {
     void deleteTip(Tips tip);
 
     // Lấy tất cả tips -> Room tự động quan sát
-    @Query("SELECT * FROM tips ORDER BY id DESC")
+    @Query("SELECT * FROM tips ORDER BY id ASC")
     LiveData<List<Tips>> getAllTips();
 
     // Lấy tip theo id

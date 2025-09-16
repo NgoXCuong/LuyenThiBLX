@@ -50,4 +50,10 @@ public class QuestionController {
     public LiveData<List<Question>> getQuestionsByCategory(String category) {
         return questionDao.getQuestionsByCategory(category);
     }
+
+    public void markQuestionAnswered(int id, boolean answered) {
+        executorService.execute(() -> {
+            questionDao.updateAnswered(id, answered);
+        });
+    }
 }

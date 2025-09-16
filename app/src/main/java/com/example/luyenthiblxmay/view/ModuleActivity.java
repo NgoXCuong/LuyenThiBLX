@@ -71,9 +71,11 @@ public class ModuleActivity extends AppCompatActivity {
                 if (q.isAnswered()) done++;
             }
             int total = questions.size();
-            progressBar.setMax(total);
-            progressBar.setProgress(done);
-            textView.setText(done + "/" + total);
+
+            progressBar.setMax(total);   // max = tổng số câu
+            progressBar.setProgress(done); // progress = số câu đã làm
+
+            textView.setText(done + "/" + total); // hiển thị kiểu 15/30
         });
     }
 
