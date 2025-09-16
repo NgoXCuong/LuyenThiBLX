@@ -159,14 +159,15 @@
                         android:layout_width="0dp"
                         android:layout_height="8dp"
                         android:layout_weight="1"
-                        android:progress="65"
+                        android:progress="0"
                         android:progressTint="#4CAF50"
                         android:progressBackgroundTint="#E8F5E8" />
 
                     <TextView
+                        android:id="@+id/tvProgressPercent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="65%"
+                        android:text="0%"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#4CAF50"
@@ -175,9 +176,10 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvProgressDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đã hoàn thành 130/200 câu hỏi"
+                    android:text="Chưa hoàn thành câu hỏi nào"
                     android:textSize="14sp"
                     android:textColor="#666666"
                     android:layout_marginTop="8dp" />

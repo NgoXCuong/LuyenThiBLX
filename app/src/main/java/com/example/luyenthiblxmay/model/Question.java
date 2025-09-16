@@ -11,20 +11,15 @@ import java.util.Map;
 
 @Entity(tableName = "questions")
 public class Question {
-
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private String question;
-
     @TypeConverters(OptionsConverter.class)
     private Map<String, String> options;
-
     private String answer;
     private String explanation;
     private String category;
     private String image;
-
     // Trạng thái người dùng
     private boolean isAnswered;
     private String selectedAnswer;
@@ -46,7 +41,6 @@ public class Question {
     }
 
     // Getter & Setter
-
     public int getId() {
         return id;
     }
