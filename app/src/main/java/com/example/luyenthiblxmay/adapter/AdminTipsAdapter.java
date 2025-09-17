@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminTipsAdapter extends RecyclerView.Adapter<AdminTipsAdapter.TipViewHolder> {
-
     public interface OnTipActionListener {
         void onEdit(Tips tip);
         void onDelete(Tips tip);

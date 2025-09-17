@@ -121,7 +121,6 @@ public class AdminTipsActivity extends AppCompatActivity {
                 }
             });
         });
-
         dialog.show();
     }
 }

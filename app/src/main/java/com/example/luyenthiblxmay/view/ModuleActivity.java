@@ -15,7 +15,6 @@ import com.example.luyenthiblxmay.model.Question;
 import java.util.List;
 
 public class ModuleActivity extends AppCompatActivity {
-
     private ProgressBar progressBook, progressEthics, progressDrive, progressSigns, progressSimulation;
     private TextView txtProgressBook, txtProgressEthics, txtProgressDrive, txtProgressSigns, txtProgressSimulation;
     private ImageView backButton;

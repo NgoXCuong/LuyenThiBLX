@@ -18,7 +18,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class ExamController {
-
     private final ExamResultDao examResultDao;
     private final ExamQuestionDao examQuestionDao;
     private final QuestionDao questionDao;
@@ -33,7 +32,6 @@ public class ExamController {
     }
 
     // ================== ExamResult ==================
-
     // Thêm ExamResult trong background (không trả về id)
     public void addExamResult(ExamResult examResult) {
         executorService.execute(() -> examResultDao.insertExamResult(examResult));
@@ -55,10 +53,6 @@ public class ExamController {
     }
 
     // Thêm ExamResult **đồng bộ** và trả về int id
-    /**
-     * Chèn ExamResult đồng bộ và trả về int id
-     * (phù hợp với entity dùng int)
-     */
     public int insertExamResultSync(ExamResult examResult) {
         try {
             Future<Long> future = executorService.submit(() ->
@@ -76,9 +70,7 @@ public class ExamController {
         }
     }
 
-
     // ================== ExamQuestion ==================
-
     // Thêm danh sách ExamQuestion
     public void insertExamQuestions(List<ExamQuestion> examQuestions) {
         executorService.execute(() -> examQuestionDao.insertExamQuestions(examQuestions));
@@ -113,7 +105,6 @@ public class ExamController {
     }
 
     // ================== Question ==================
-
     // Lấy câu hỏi ngẫu nhiên
     public LiveData<List<Question>> getRandomQuestions() {
         return questionDao.getRandomQuestions();

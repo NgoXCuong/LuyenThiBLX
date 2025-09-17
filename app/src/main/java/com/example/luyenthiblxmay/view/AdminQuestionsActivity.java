@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AdminQuestionsActivity extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private ImageButton btnAddQuestion;
     private AdminQuestionsAdapter adapter;

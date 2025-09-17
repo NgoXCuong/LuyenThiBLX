@@ -12,7 +12,6 @@ import androidx.room.PrimaryKey;
 public class ExamResult {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private int userId;
     private int totalQuestions;
     private int correctAnswers;
@@ -20,8 +19,6 @@ public class ExamResult {
     private String category;
 
     // getters và setters
-
-
     public int getId() {
         return id;
     }

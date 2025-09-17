@@ -14,7 +14,6 @@ import java.util.List;
 
 @Dao
 public interface UserQuestionDao {
-
     // Thêm mới câu hỏi người dùng đã trả lời
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(UserQuestion userQuestion);

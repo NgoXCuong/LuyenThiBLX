@@ -13,7 +13,6 @@ import java.util.List;
 
 @Dao
 public interface ExamResultDao {
-
     @Insert
 //    long insertExamResult(ExamResult examResult);
     long insertExamResult(ExamResult result);

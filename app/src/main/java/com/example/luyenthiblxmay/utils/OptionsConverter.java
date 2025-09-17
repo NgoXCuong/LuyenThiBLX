@@ -9,7 +9,6 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 public class OptionsConverter {
-
     @TypeConverter
     public static String fromMap(Map<String, String> map) {
         return new Gson().toJson(map);

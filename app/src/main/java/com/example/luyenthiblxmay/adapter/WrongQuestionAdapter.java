@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 public class WrongQuestionAdapter extends RecyclerView.Adapter<WrongQuestionAdapter.ViewHolder> {
-
     private Context context;
     private List<Question> questions;
 
@@ -118,9 +117,7 @@ public class WrongQuestionAdapter extends RecyclerView.Adapter<WrongQuestionAdap
                 holder.tvResult.setVisibility(View.VISIBLE);
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -145,5 +142,4 @@ public class WrongQuestionAdapter extends RecyclerView.Adapter<WrongQuestionAdap
             imgQuestion = itemView.findViewById(R.id.imgQuestion);
         }
     }
-
 }

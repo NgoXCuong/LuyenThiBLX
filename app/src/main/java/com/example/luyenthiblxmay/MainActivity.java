@@ -20,6 +20,7 @@ import com.example.luyenthiblxmay.dao.UserDao;
 import com.example.luyenthiblxmay.database.AppDatabase;
 import com.example.luyenthiblxmay.model.Question;
 import com.example.luyenthiblxmay.model.User;
+import com.example.luyenthiblxmay.view.BienBaoActivity;
 import com.example.luyenthiblxmay.view.ExamTestActivity;
 import com.example.luyenthiblxmay.view.LoginActivity;
 import com.example.luyenthiblxmay.view.ModuleActivity;
@@ -52,11 +53,14 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout layoutHocLyThuyet = findViewById(R.id.layoutHocLyThuyet);
         LinearLayout layoutThiThu = findViewById(R.id.layoutThithu);
         LinearLayout layoutCauSai = findViewById(R.id.layoutCauSai);
+        LinearLayout layoutBienBao = findViewById(R.id.layoutBienBao);
+
 
         layoutMeoHocTap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TipsActivity.class)));
         layoutHocLyThuyet.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ModuleActivity.class)));
         layoutThiThu.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ExamTestActivity.class)));
         layoutCauSai.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, WrongQuestionsActivity.class)));
+        layoutBienBao.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BienBaoActivity.class)));
 
         // --- Hiển thị thông tin user ---
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),

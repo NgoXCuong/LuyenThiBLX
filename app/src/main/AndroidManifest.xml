@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LuyenThiBLXMay">
         <activity
+            android:name=".view.BienBaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.AdminBienBaoActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.WrongQuestionsActivity"
             android:exported="false" />
         <activity

@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 
 public class PasswordUtils {
-
     private static final String ALGORITHM = "SHA-256";
     private static final String CHARSET = "UTF-8";
 
@@ -26,7 +25,6 @@ public class PasswordUtils {
                 }
                 hexString.append(hex);
             }
-
             return hexString.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +111,6 @@ public class PasswordUtils {
         for (int i = 0; i < length; i++) {
             password.append(chars.charAt(random.nextInt(chars.length())));
         }
-
         return password.toString();
     }
 }

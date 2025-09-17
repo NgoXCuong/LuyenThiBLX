@@ -8,10 +8,8 @@ import androidx.room.PrimaryKey;
 public class Tips {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     @ColumnInfo(name = "title")
     private String title;
-
     @ColumnInfo(name = "content")
     private String content;
 

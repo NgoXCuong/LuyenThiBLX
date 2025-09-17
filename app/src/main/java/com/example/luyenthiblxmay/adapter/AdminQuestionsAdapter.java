@@ -16,11 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminQuestionsAdapter extends RecyclerView.Adapter<AdminQuestionsAdapter.QuestionViewHolder> {
-
     private List<Question> questions = new ArrayList<>();
     private OnEditListener onEditListener;
     private OnDeleteListener onDeleteListener;
-
     public interface OnEditListener {
         void onEdit(Question question);
     }

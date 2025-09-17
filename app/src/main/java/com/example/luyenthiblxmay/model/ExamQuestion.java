@@ -20,7 +20,6 @@ import androidx.room.PrimaryKey;
 public class ExamQuestion {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private int examId;
     private int questionId;
     private String selectedAnswer;

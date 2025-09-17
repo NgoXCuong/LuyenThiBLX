@@ -12,7 +12,6 @@ import com.example.luyenthiblxmay.MainActivity;
 import com.example.luyenthiblxmay.R;
 
 public class AdminDashboardActivity extends AppCompatActivity {
-
     private ImageView logoutBtn;
     private CardView cardManageTips, cardManageUsers, cardManageQuestions, cardManageSigns;
 
@@ -52,13 +51,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
         cardManageQuestions.setOnClickListener(v ->
                 startActivity(new Intent(AdminDashboardActivity.this, AdminQuestionsActivity.class))
         );
-//
-//        cardManageExams.setOnClickListener(v ->
-//                startActivity(new Intent(AdminDashboardActivity.this, AdminExamsActivity.class))
-//        );
-//
-//        cardManageSigns.setOnClickListener(v ->
-//                startActivity(new Intent(AdminDashboardActivity.this, AdminSignsActivity.class))
-//        );
+        cardManageSigns.setOnClickListener(v ->
+                startActivity(new Intent(AdminDashboardActivity.this, AdminBienBaoActivity.class))
+        );
     }
 }

@@ -2,7 +2,6 @@ package com.example.luyenthiblxmay.utils;
 
 
 public class ValidationUtils {
-
     /**
      * Kiểm tra email hợp lệ
      * @param email Email cần kiểm tra

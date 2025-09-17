@@ -25,22 +25,22 @@ import java.util.concurrent.Executors;
                 ExamResult.class,
                 ExamQuestion.class,
                 UserQuestion.class,
-                UserLearningProgress.class
+                UserLearningProgress.class,
+                BienBao.class
         },
-        version = 5,
+        version = 6,
         exportSchema = false
 )
 @TypeConverters({AppDatabase.Converters.class, OptionsConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
-
     private static volatile AppDatabase INSTANCE;
-
     public abstract UserDao userDao();
     public abstract TipsDao tipsDao();
     public abstract QuestionDao questionDao();
     public abstract ExamResultDao examResultDao();
     public abstract ExamQuestionDao examQuestionDao();
     public abstract UserQuestionDao userQuestionDao();
+    public abstract  BienBaoDao bienBaoDao();
 
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -51,7 +51,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                     AppDatabase.class,
                                     "app_thi_blx"
                             )
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
                             .addCallback(new Callback() {
                                 @Override
                                 public void onOpen(@NonNull SupportSQLiteDatabase db) {
@@ -181,4 +181,18 @@ public abstract class AppDatabase extends RoomDatabase {
             database.execSQL("CREATE INDEX IF NOT EXISTS `index_user_learning_progress_userId` ON `user_learning_progress`(`userId`)");
         }
     };
+
+    // Migration 5->6: tạo bảng BienBao
+    static final Migration MIGRATION_5_6 = new Migration(5, 6) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS `bien_bao` (" +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "`ten_bien_bao` TEXT, " +
+                    "`loai_bien_bao` TEXT, " +
+                    "`hinh_anh` TEXT, " +
+                    "`mo_ta` TEXT)");
+        }
+    };
+
 }

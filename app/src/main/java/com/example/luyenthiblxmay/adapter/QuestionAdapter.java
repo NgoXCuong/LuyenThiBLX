@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
-
     private final Context context;
     private List<Question> questions;
     private final QuestionController questionController;

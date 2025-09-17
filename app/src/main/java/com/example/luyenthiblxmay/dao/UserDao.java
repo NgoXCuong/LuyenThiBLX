@@ -13,7 +13,6 @@ import java.util.List;
 
 @Dao
 public interface UserDao {
-
     // Insert user - trả về long (ID của record mới)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertUser(User user);

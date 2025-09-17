@@ -34,7 +34,6 @@ public class ExamTestActivity extends AppCompatActivity {
     private RadioButton rbA, rbB, rbC, rbD;
     private Button btnNext, btnSubmit;
     private ImageView imgQuestion;
-
     private ExamController examController;
     private List<Question> questionList = new ArrayList<>();
     private List<ExamQuestion> examAnswers = new ArrayList<>();
@@ -42,7 +41,6 @@ public class ExamTestActivity extends AppCompatActivity {
     private int currentExamId;
     private int currentUserId = 1;
     private int correctCount = 0;
-
     private CountDownTimer countDownTimer;
     private static final long EXAM_DURATION = 19 * 60 * 1000; // 19 phút
     private boolean warningTriggered = false; // cảnh báo 1 phút cuối
@@ -122,7 +120,6 @@ public class ExamTestActivity extends AppCompatActivity {
 
                 tvTimer.setText(String.format("⏰ %02d:%02d", minutes, seconds));
             }
-
             @Override
             public void onFinish() {
                 finishExam(); // hết giờ tự nộp
@@ -173,7 +170,6 @@ public class ExamTestActivity extends AppCompatActivity {
                 rbD.setVisibility(RadioButton.VISIBLE);
             }
         }
-
         rgOptions.clearCheck();
     }
 

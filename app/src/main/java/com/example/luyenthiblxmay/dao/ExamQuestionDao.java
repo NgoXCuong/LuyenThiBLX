@@ -12,7 +12,6 @@ import java.util.List;
 
 @Dao
 public interface ExamQuestionDao {
-
     @Insert
     void insertExamQuestions(List<ExamQuestion> examQuestions);
 
