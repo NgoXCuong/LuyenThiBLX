@@ -156,19 +156,19 @@ public class ExamTestActivity extends AppCompatActivity {
 
         Map<String, String> options = q.getOptions();
         if (options != null) {
-            if (options.containsKey("A")) {
+            if (options.containsKey("A") && options.get("A") != null && !options.get("A").trim().isEmpty()) {
                 rbA.setText("A. " + options.get("A"));
                 rbA.setVisibility(RadioButton.VISIBLE);
             }
-            if (options.containsKey("B")) {
+            if (options.containsKey("B") && options.get("B") != null && !options.get("B").trim().isEmpty()) {
                 rbB.setText("B. " + options.get("B"));
                 rbB.setVisibility(RadioButton.VISIBLE);
             }
-            if (options.containsKey("C")) {
+            if (options.containsKey("C") && options.get("C") != null && !options.get("C").trim().isEmpty()) {
                 rbC.setText("C. " + options.get("C"));
                 rbC.setVisibility(RadioButton.VISIBLE);
             }
-            if (options.containsKey("D")) {
+            if (options.containsKey("D") && options.get("D") != null && !options.get("D").trim().isEmpty()) {
                 rbD.setText("D. " + options.get("D"));
                 rbD.setVisibility(RadioButton.VISIBLE);
             }

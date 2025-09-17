@@ -47,21 +47,21 @@ public class WrongQuestionAdapter extends RecyclerView.Adapter<WrongQuestionAdap
         holder.tvQuestion.setText(q.getQuestion());
 
         // Hiển thị ảnh nếu có
-        if (q.getImage() != null && !q.getImage().isEmpty()) {
-            holder.imgQuestion.setVisibility(View.VISIBLE);
-            try {
-                // q.getImage() ví dụ: "bienbao/camdi.png"
-                InputStream inputStream = context.getAssets().open(q.getImage());
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                holder.imgQuestion.setImageBitmap(bitmap);
-                inputStream.close();
-            } catch (IOException e) {
+            if (q.getImage() != null && !q.getImage().isEmpty()) {
+                holder.imgQuestion.setVisibility(View.VISIBLE);
+                try {
+                    // q.getImage() ví dụ: "bienbao/camdi.png"
+                    InputStream inputStream = context.getAssets().open(q.getImage());
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    holder.imgQuestion.setImageBitmap(bitmap);
+                    inputStream.close();
+                } catch (IOException e) {
+                    holder.imgQuestion.setVisibility(View.GONE);
+                    e.printStackTrace();
+                }
+            } else {
                 holder.imgQuestion.setVisibility(View.GONE);
-                e.printStackTrace();
             }
-        } else {
-            holder.imgQuestion.setVisibility(View.GONE);
-        }
 
 
         // Ẩn tất cả đáp án trước
@@ -73,19 +73,19 @@ public class WrongQuestionAdapter extends RecyclerView.Adapter<WrongQuestionAdap
         // Hiển thị đáp án nếu có
         Map<String, String> options = q.getOptions();
         if (options != null) {
-            if (options.get("A") != null) {
+            if (options.containsKey("A") && options.get("A") != null && !options.get("A").trim().isEmpty()) {
                 holder.rbA.setText("A. " + options.get("A"));
                 holder.rbA.setVisibility(View.VISIBLE);
             }
-            if (options.get("B") != null) {
+            if (options.containsKey("B") && options.get("B") != null && !options.get("B").trim().isEmpty()) {
                 holder.rbB.setText("B. " + options.get("B"));
                 holder.rbB.setVisibility(View.VISIBLE);
             }
-            if (options.get("C") != null) {
+            if (options.containsKey("C") && options.get("C") != null && !options.get("C").trim().isEmpty()) {
                 holder.rbC.setText("C. " + options.get("C"));
                 holder.rbC.setVisibility(View.VISIBLE);
             }
-            if (options.get("D") != null) {
+            if (options.containsKey("D") && options.get("D") != null && !options.get("D").trim().isEmpty()) {
                 holder.rbD.setText("D. " + options.get("D"));
                 holder.rbD.setVisibility(View.VISIBLE);
             }
@@ -106,10 +106,14 @@ public class WrongQuestionAdapter extends RecyclerView.Adapter<WrongQuestionAdap
             if (!selected.isEmpty()) {
                 if (selected.equalsIgnoreCase(q.getAnswer())) {
                     holder.tvResult.setTextColor(Color.parseColor("#388E3C"));
-                    holder.tvResult.setText("✅ Chính xác!\n\n💡 " + q.getExplanation());
+                    String explanation = (q.getExplanation() != null && !q.getExplanation().trim().isEmpty())
+                            ? "\n\n💡 " + q.getExplanation() : "";
+                    holder.tvResult.setText("✅ Chính xác!" + explanation);
                 } else {
                     holder.tvResult.setTextColor(Color.parseColor("#D32F2F"));
-                    holder.tvResult.setText("❌ Sai! Đáp án đúng là: " + q.getAnswer());
+                    String explanation = (q.getExplanation() != null && !q.getExplanation().trim().isEmpty())
+                            ? "\n\n💡 " + q.getExplanation() : "";
+                    holder.tvResult.setText("❌ Sai! Đáp án đúng là: " + q.getAnswer() + explanation);
                 }
                 holder.tvResult.setVisibility(View.VISIBLE);
             }

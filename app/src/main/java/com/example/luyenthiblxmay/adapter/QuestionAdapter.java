@@ -1,6 +1,8 @@
 package com.example.luyenthiblxmay.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import com.example.luyenthiblxmay.R;
 import com.example.luyenthiblxmay.controller.QuestionController;
 import com.example.luyenthiblxmay.model.Question;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -56,20 +60,46 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         holder.tvQuestionText.setText("Câu " + (position + 1) + ": " + question.getQuestion());
 
         // Ảnh minh họa
-        if (question.getImage() != null && !question.getImage().isEmpty()) {
+        if (question.getImage() != null && !question.getImage().trim().isEmpty()) {
             holder.imgQuestion.setVisibility(View.VISIBLE);
-            Glide.with(context).load(question.getImage()).into(holder.imgQuestion);
+            try {
+                InputStream inputStream = context.getAssets().open(question.getImage());
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                holder.imgQuestion.setImageBitmap(bitmap);
+                inputStream.close();
+            } catch (IOException e) {
+                holder.imgQuestion.setVisibility(View.GONE);
+                e.printStackTrace();
+            }
         } else {
             holder.imgQuestion.setVisibility(View.GONE);
         }
 
+        // Ẩn tất cả option trước
+        holder.rbA.setVisibility(View.GONE);
+        holder.rbB.setVisibility(View.GONE);
+        holder.rbC.setVisibility(View.GONE);
+        holder.rbD.setVisibility(View.GONE);
+
         // Các đáp án
         Map<String, String> options = question.getOptions();
         if (options != null) {
-            holder.rbA.setText("A. " + options.get("A"));
-            holder.rbB.setText("B. " + options.get("B"));
-            holder.rbC.setText("C. " + options.get("C"));
-            holder.rbD.setText("D. " + options.get("D"));
+            if (options.containsKey("A") && options.get("A") != null && !options.get("A").trim().isEmpty()) {
+                holder.rbA.setText("A. " + options.get("A"));
+                holder.rbA.setVisibility(View.VISIBLE);
+            }
+            if (options.containsKey("B") && options.get("B") != null && !options.get("B").trim().isEmpty()) {
+                holder.rbB.setText("B. " + options.get("B"));
+                holder.rbB.setVisibility(View.VISIBLE);
+            }
+            if (options.containsKey("C") && options.get("C") != null && !options.get("C").trim().isEmpty()) {
+                holder.rbC.setText("C. " + options.get("C"));
+                holder.rbC.setVisibility(View.VISIBLE);
+            }
+            if (options.containsKey("D") && options.get("D") != null && !options.get("D").trim().isEmpty()) {
+                holder.rbD.setText("D. " + options.get("D"));
+                holder.rbD.setVisibility(View.VISIBLE);
+            }
         }
 
         // Reset RadioGroup
@@ -109,24 +139,32 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         if (selected == null) return;
 
         // Tick đáp án đã chọn
-        switch (selected) {
-            case "A": holder.rbA.setChecked(true); break;
-            case "B": holder.rbB.setChecked(true); break;
-            case "C": holder.rbC.setChecked(true); break;
-            case "D": holder.rbD.setChecked(true); break;
-        }
+        if ("A".equals(selected)) holder.rbA.setChecked(true);
+        else if ("B".equals(selected)) holder.rbB.setChecked(true);
+        else if ("C".equals(selected)) holder.rbC.setChecked(true);
+        else if ("D".equals(selected)) holder.rbD.setChecked(true);
 
         // Hiển thị giải thích
         if (selected.equals(question.getAnswer())) {
-            holder.tvExplanation.setText("✔ Đúng! " + question.getExplanation());
+            String explanation = (question.getExplanation() != null && !question.getExplanation().trim().isEmpty())
+                    ? "✔ Đúng! " + question.getExplanation()
+                    : "✔ Đúng!";
+            holder.tvExplanation.setText(explanation);
             holder.tvExplanation.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
         } else {
-            String correctOption = question.getAnswer() + ". " + question.getOptions().get(question.getAnswer());
-            holder.tvExplanation.setText("✘ Sai! Đáp án đúng: " + correctOption + "\n" + question.getExplanation());
+            String correctOption = question.getAnswer();
+            if (question.getOptions() != null && question.getOptions().get(correctOption) != null) {
+                correctOption += ". " + question.getOptions().get(correctOption);
+            }
+            String explanation = (question.getExplanation() != null && !question.getExplanation().trim().isEmpty())
+                    ? "\n💡 " + question.getExplanation()
+                    : "";
+            holder.tvExplanation.setText("✘ Sai! Đáp án đúng: " + correctOption + explanation);
             holder.tvExplanation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
         }
         holder.tvExplanation.setVisibility(View.VISIBLE);
     }
+
 
     @Override
     public int getItemCount() {
