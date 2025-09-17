@@ -34,17 +34,21 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
+    <!-- Nút thêm mẹo (chỉ admin) -->
+    <ImageButton
+        android:id="@+id/btnAddUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_input_add"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Thêm tài khoản"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="5dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUsers"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp"/>
-
-    <Button
-        android:id="@+id/btnAddUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thêm tài khoản"
-        android:layout_marginTop="8dp"/>
+        android:padding="8dp" />
 </LinearLayout>

@@ -21,7 +21,6 @@ import androidx.room.PrimaryKey;
 public class UserQuestion {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private int userId;
     private int questionId;
     private boolean isAnswered;
@@ -29,8 +28,6 @@ public class UserQuestion {
     private long answeredAt;
 
     // getters và sette
-
-
     public UserQuestion() {
     }
 
@@ -43,7 +40,6 @@ public class UserQuestion {
         this.selectedAnswer = selectedAnswer;
         this.answeredAt = answeredAt;
     }
-
 
     public int getId() {
         return id;

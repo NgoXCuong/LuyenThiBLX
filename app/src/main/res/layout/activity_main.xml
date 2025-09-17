@@ -65,7 +65,6 @@
                 android:src="@drawable/ic_logout"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="4dp" />
-
         </LinearLayout>
 
         <!-- Mascot and Message Section -->
@@ -104,7 +103,6 @@
                     android:textColor="@android:color/white"
                     android:padding="10dp"
                     android:textAlignment="center" />
-
             </androidx.cardview.widget.CardView>
 
             <!-- Motorcycle -->
@@ -117,10 +115,7 @@
                 android:layout_marginBottom="15dp"
                 android:src="@drawable/drive"
                 android:scaleType="fitCenter" />
-
         </RelativeLayout>
-
-
 
         <!-- Progress Card -->
         <androidx.cardview.widget.CardView
@@ -172,7 +167,6 @@
                         android:textStyle="bold"
                         android:textColor="#4CAF50"
                         android:layout_marginStart="12dp" />
-
                 </LinearLayout>
 
                 <TextView
@@ -183,9 +177,7 @@
                     android:textSize="14sp"
                     android:textColor="#666666"
                     android:layout_marginTop="8dp" />
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
         <!-- Main Menu Grid -->
@@ -230,9 +222,7 @@
                         android:textColor="@android:color/white"
                         android:textAlignment="center"
                         android:layout_marginTop="6dp" />
-
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
 
             <!-- Thi thử -->
@@ -268,9 +258,7 @@
                         android:textColor="@android:color/white"
                         android:textAlignment="center"
                         android:layout_marginTop="6dp" />
-
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
 
             <!-- Câu hỏi sai -->
@@ -306,9 +294,7 @@
                         android:textColor="@android:color/white"
                         android:textAlignment="center"
                         android:layout_marginTop="6dp" />
-
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
 
             <!-- Biển báo -->
@@ -344,9 +330,7 @@
                         android:textColor="@android:color/white"
                         android:textAlignment="center"
                         android:layout_marginTop="6dp" />
-
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
         </GridLayout>
 
@@ -396,13 +380,8 @@
                         android:textSize="15sp"
                         android:textColor="#666666"
                         android:layout_marginTop="4dp" />
-
                 </LinearLayout>
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
-
 </ScrollView>

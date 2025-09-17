@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey;
 public class UserLearningProgress {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private int userId;
     private String category; // chủ đề
     private int lastQuestionId; // câu cuối cùng đã học

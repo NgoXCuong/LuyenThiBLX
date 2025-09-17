@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.util.List;
 
 public class AdminBienBaoAdapter extends RecyclerView.Adapter<AdminBienBaoAdapter.AdminBienBaoViewHolder> {
-
     private final Context context;
     private List<BienBao> bienBaoList;
     private final OnBienBaoActionListener listener;

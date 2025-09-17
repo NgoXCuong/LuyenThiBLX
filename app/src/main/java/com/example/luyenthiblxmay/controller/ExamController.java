@@ -31,7 +31,6 @@ public class ExamController {
         executorService = Executors.newSingleThreadExecutor();
     }
 
-    // ================== ExamResult ==================
     // Thêm ExamResult trong background (không trả về id)
     public void addExamResult(ExamResult examResult) {
         executorService.execute(() -> examResultDao.insertExamResult(examResult));
@@ -40,16 +39,6 @@ public class ExamController {
     // Cập nhật ExamResult
     public void updateExamResult(ExamResult examResult) {
         executorService.execute(() -> examResultDao.updateExamResult(examResult));
-    }
-
-    // Lấy ExamResult theo id
-    public LiveData<ExamResult> getExamResultById(int id) {
-        return examResultDao.getExamResultById(id);
-    }
-
-    // Lấy tất cả ExamResult của user
-    public LiveData<List<ExamResult>> getAllExamResultsByUser(int userId) {
-        return examResultDao.getAllExamResultsByUser(userId);
     }
 
     // Thêm ExamResult **đồng bộ** và trả về int id
@@ -70,41 +59,11 @@ public class ExamController {
         }
     }
 
-    // ================== ExamQuestion ==================
     // Thêm danh sách ExamQuestion
     public void insertExamQuestions(List<ExamQuestion> examQuestions) {
         executorService.execute(() -> examQuestionDao.insertExamQuestions(examQuestions));
     }
 
-    // Lấy danh sách câu hỏi theo examId
-    public LiveData<List<ExamQuestion>> getQuestionsByExamId(int examId) {
-        return examQuestionDao.getQuestionsByExamId(examId);
-    }
-
-    // Lấy danh sách câu sai theo examId
-    public LiveData<List<ExamQuestion>> getWrongQuestionsByExamId(int examId) {
-        return examQuestionDao.getWrongQuestionsByExamId(examId);
-    }
-
-    // Lấy chi tiết câu sai (dùng cho màn làm lại câu sai)
-    public LiveData<List<Question>> getWrongQuestionsWithDetail(int examId) {
-        return examQuestionDao.getWrongQuestionsWithDetail(examId);
-    }
-
-    // Đồng bộ: lấy chi tiết câu sai (nếu cần dùng trong background thread)
-    public List<Question> getWrongQuestionsWithDetailSync(int examId) {
-        try {
-            Future<List<Question>> future = executorService.submit(() ->
-                    examQuestionDao.getWrongQuestionsWithDetailSync(examId)
-            );
-            return future.get();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // ================== Question ==================
     // Lấy câu hỏi ngẫu nhiên
     public LiveData<List<Question>> getRandomQuestions() {
         return questionDao.getRandomQuestions();

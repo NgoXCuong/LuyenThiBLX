@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.util.List;
 
 public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.BienBaoViewHolder> {
-
     private static final String TAG = "BienBaoAdapter";
     private final Context context;
     private List<BienBao> bienBaoList;

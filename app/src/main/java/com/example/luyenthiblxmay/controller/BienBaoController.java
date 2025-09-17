@@ -27,11 +27,6 @@ public class BienBaoController {
         executorService.execute(() -> bienBaoDao.insertBienBao(bienBao));
     }
 
-    // Thêm nhiều biển báo
-    public void insertAllBienBao(List<BienBao> bienBaoList) {
-        executorService.execute(() -> bienBaoDao.insertAllBienBao(bienBaoList));
-    }
-
     // Cập nhật
     public void updateBienBao(BienBao bienBao) {
         executorService.execute(() -> bienBaoDao.updateBienBao(bienBao));
@@ -42,28 +37,13 @@ public class BienBaoController {
         executorService.execute(() -> bienBaoDao.deleteBienBao(bienBao));
     }
 
-    // Xóa tất cả
-    public void deleteAllBienBao() {
-        executorService.execute(bienBaoDao::deleteAllBienBao);
-    }
-
     // Lấy tất cả
     public LiveData<List<BienBao>> getAllBienBao() {
         return bienBaoDao.getAllBienBao();
     }
 
-    // Lấy theo id
-    public LiveData<BienBao> getBienBaoById(int id) {
-        return bienBaoDao.getBienBaoById(id);
-    }
-
     // Lấy theo loại
     public LiveData<List<BienBao>> getBienBaoByLoai(String loai) {
         return bienBaoDao.getBienBaoByLoai(loai);
-    }
-
-    // Tìm theo tên
-    public LiveData<List<BienBao>> searchBienBaoByName(String keyword) {
-        return bienBaoDao.searchBienBaoByName(keyword);
     }
 }

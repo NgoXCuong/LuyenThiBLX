@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WrongQuestionsActivity extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private WrongQuestionAdapter adapter;
     private List<Question> questionList = new ArrayList<>();

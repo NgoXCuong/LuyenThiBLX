@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:padding="10dp"
     android:elevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="12dp" >
 
         <!-- Nội dung câu hỏi -->
         <TextView
@@ -36,23 +36,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="8dp">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✏️ Sửa"
-                android:textSize="14sp" />
+                android:src="@android:drawable/ic_menu_edit"
+                android:contentDescription="Sửa"
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🗑 Xóa"
-                android:textSize="14sp"
-                android:layout_marginStart="10dp"
-                android:textColor="@android:color/holo_red_dark"/>
+                android:src="@android:drawable/ic_menu_delete"
+                android:contentDescription="Xóa"
+                android:background="?attr/selectableItemBackgroundBorderless" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

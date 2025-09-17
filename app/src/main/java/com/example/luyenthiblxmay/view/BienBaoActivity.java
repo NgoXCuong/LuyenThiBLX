@@ -39,7 +39,7 @@ public class BienBaoActivity extends AppCompatActivity {
         recyclerBienBao.setAdapter(adapter);
 
         // Load mặc định "Cấm"
-        bienBaoController.getBienBaoByLoai("Cam").observe(this,
+        bienBaoController.getBienBaoByLoai("Biển báo cấm").observe(this,
                 bienBaos -> adapter.setBienBaoList(bienBaos));
 
         setupTabs();
@@ -57,11 +57,11 @@ public class BienBaoActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 String loai;
                 switch (tab.getPosition()) {
-                    case 0: loai = "Cam"; break;
-                    case 1: loai = "Nguy hiem"; break;
-                    case 2: loai = "Chi dan"; break;
-                    case 3: loai = "Hieu lenh"; break;
-                    case 4: loai = "Phu"; break;
+                    case 0: loai = "Biển báo cấm"; break;
+                    case 1: loai = "Biển báo nguy hiểm"; break;
+                    case 2: loai = "Biển báo chỉ dẫn"; break;
+                    case 3: loai = "Biển báo hiệu lệnh"; break;
+                    case 4: loai = "Biển phụ"; break;
                     default: loai = ""; break;
                 }
 

@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LuyenThiBLXMay</string>
+
+    <string name="category_prompt">Chọn loại câu hỏi</string>
+    <string-array name="question_categories">
+        <item>Khái niệm và quy tắc</item>
+        <item>Văn hóa và đạo đức lái xe</item>
+        <item>Kỹ thuật lái xe</item>
+        <item>Biển báo</item>
+        <item>Sa hình</item>
+    </string-array>
+
+    <string-array name="loai_bien_bao_array">
+        <item>Chọn loại biển báo</item>
+        <item>Biển báo cấm</item>
+        <item>Biển báo nguy hiểm</item>
+        <item>Biển báo hiệu lệnh</item>
+        <item>Biển báo chỉ dẫn</item>
+        <item>Biển phụ</item>
+    </string-array>
+
 </resources>
+

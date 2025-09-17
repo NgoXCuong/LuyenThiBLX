@@ -77,21 +77,6 @@ public class UserController {
         });
     }
 
-    public void loginAdmin(String email, String password, LoginCallback callback) {
-        executor.execute(() -> {
-            try {
-                User admin = userDao.getAdminByEmail(email);
-                boolean success = admin != null && hashPassword(password).equals(admin.getPassword());
-                if (callback != null) {
-                    callback.onResult(success, admin, success ? "Đăng nhập admin thành công!" : "Không phải tài khoản admin hoặc sai mật khẩu!");
-                }
-            } catch (Exception e) {
-                if (callback != null) callback.onResult(false, null, "Lỗi: " + e.getMessage());
-            }
-        });
-    }
-
-
     // Lấy tất cả user bằng LiveData
     public LiveData<List<User>> getAllUsers() {
         MutableLiveData<List<User>> liveData = new MutableLiveData<>();
@@ -149,9 +134,5 @@ public class UserController {
 
     public interface DeleteCallback {
         void onResult(boolean success, String message);
-    }
-
-    public interface UserListCallback {
-        void onResult(List<User> users);
     }
 }

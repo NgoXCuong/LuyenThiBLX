@@ -48,18 +48,18 @@ public class ModuleActivity extends AppCompatActivity {
         txtProgressSimulation = findViewById(R.id.txtProgressSimulation);
 
         // Quan sát LiveData cho từng category
-        observeCategoryProgress("Khai niem va quy tac", progressBook, txtProgressBook);
-        observeCategoryProgress("Van hoa va dao duc lai xe", progressEthics, txtProgressEthics);
-        observeCategoryProgress("Ky thuat lai xe", progressDrive, txtProgressDrive);
-        observeCategoryProgress("Bien bao", progressSigns, txtProgressSigns);
-        observeCategoryProgress("Sa hinh", progressSimulation, txtProgressSimulation);
+        observeCategoryProgress("Khái niệm và quy tắc", progressBook, txtProgressBook);
+        observeCategoryProgress("Văn hóa và đạo đức lái xe", progressEthics, txtProgressEthics);
+        observeCategoryProgress("Kỹ thuật lái xe", progressDrive, txtProgressDrive);
+        observeCategoryProgress("Biển báo", progressSigns, txtProgressSigns);
+        observeCategoryProgress("Sa hình", progressSimulation, txtProgressSimulation);
 
         // Card click listeners → mở QuestionsActivity theo module
-        findViewById(R.id.cardBook).setOnClickListener(v -> openQuestionActivity("Khai niem va quy tac"));
-        findViewById(R.id.cardEthics).setOnClickListener(v -> openQuestionActivity("Van hoa va dao duc lai xe"));
-        findViewById(R.id.cardDrive).setOnClickListener(v -> openQuestionActivity("Ky thuat lai xe"));
-        findViewById(R.id.cardSigns).setOnClickListener(v -> openQuestionActivity("Bien bao"));
-        findViewById(R.id.cardSimulation).setOnClickListener(v -> openQuestionActivity("Sa hinh"));
+        findViewById(R.id.cardBook).setOnClickListener(v -> openQuestionActivity("Khái niệm và quy tắc"));
+        findViewById(R.id.cardEthics).setOnClickListener(v -> openQuestionActivity("Văn hóa và đạo đức lái xe"));
+        findViewById(R.id.cardDrive).setOnClickListener(v -> openQuestionActivity("Kỹ thuật lái xe"));
+        findViewById(R.id.cardSigns).setOnClickListener(v -> openQuestionActivity("Biển báo"));
+        findViewById(R.id.cardSimulation).setOnClickListener(v -> openQuestionActivity("Sa hình"));
     }
 
     // Quan sát LiveData, tự update progress khi dữ liệu thay đổi

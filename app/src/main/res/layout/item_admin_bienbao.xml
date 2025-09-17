@@ -82,8 +82,6 @@
                     android:src="@android:drawable/ic_menu_delete"
                     android:contentDescription="Xóa" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -46,22 +46,21 @@ public class WrongQuestionAdapter extends RecyclerView.Adapter<WrongQuestionAdap
         holder.tvQuestion.setText(q.getQuestion());
 
         // Hiển thị ảnh nếu có
-            if (q.getImage() != null && !q.getImage().isEmpty()) {
-                holder.imgQuestion.setVisibility(View.VISIBLE);
-                try {
-                    // q.getImage() ví dụ: "bienbao/camdi.png"
-                    InputStream inputStream = context.getAssets().open(q.getImage());
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    holder.imgQuestion.setImageBitmap(bitmap);
-                    inputStream.close();
-                } catch (IOException e) {
-                    holder.imgQuestion.setVisibility(View.GONE);
-                    e.printStackTrace();
-                }
-            } else {
+        if (q.getImage() != null && !q.getImage().isEmpty()) {
+            holder.imgQuestion.setVisibility(View.VISIBLE);
+            try {
+                // q.getImage() ví dụ: "bienbao/camdi.png"
+                InputStream inputStream = context.getAssets().open(q.getImage());
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                holder.imgQuestion.setImageBitmap(bitmap);
+                inputStream.close();
+            } catch (IOException e) {
                 holder.imgQuestion.setVisibility(View.GONE);
+                e.printStackTrace();
             }
-
+        } else {
+            holder.imgQuestion.setVisibility(View.GONE);
+        }
 
         // Ẩn tất cả đáp án trước
         holder.rbA.setVisibility(View.GONE);

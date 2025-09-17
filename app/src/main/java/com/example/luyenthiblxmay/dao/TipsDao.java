@@ -32,12 +32,4 @@ public interface TipsDao {
     // Lấy tất cả tips -> Room tự động quan sát
     @Query("SELECT * FROM tips ORDER BY id ASC")
     LiveData<List<Tips>> getAllTips();
-
-    // Lấy tip theo id
-    @Query("SELECT * FROM tips WHERE id = :id LIMIT 1")
-    LiveData<Tips> getTipById(int id);
-
-    // Tìm kiếm theo tiêu đề
-    @Query("SELECT * FROM tips WHERE title LIKE '%' || :keyword || '%'")
-    LiveData<List<Tips>> searchTipsByTitle(String keyword);
 }

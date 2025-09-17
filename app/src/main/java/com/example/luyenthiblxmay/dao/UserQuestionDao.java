@@ -25,24 +25,4 @@ public interface UserQuestionDao {
     // Xóa câu hỏi người dùng
     @Delete
     void delete(UserQuestion userQuestion);
-
-    // Xóa tất cả
-    @Query("DELETE FROM user_question")
-    void deleteAll();
-
-    // Lấy tất cả câu hỏi người dùng
-    @Query("SELECT * FROM user_question")
-    LiveData<List<UserQuestion>> getAll();
-
-    // Lấy tất cả câu hỏi của 1 user
-    @Query("SELECT * FROM user_question WHERE userId = :userId")
-    LiveData<List<UserQuestion>> getByUserId(int userId);
-
-    // Lấy tất cả câu trả lời sai của user
-    @Query("SELECT * FROM user_question WHERE userId = :userId AND isAnswered = 1 AND selectedAnswer != (SELECT answer FROM questions WHERE questions.id = user_question.questionId)")
-    LiveData<List<UserQuestion>> getWrongAnswersByUser(int userId);
-
-    // Lấy 1 câu hỏi theo user và questionId
-    @Query("SELECT * FROM user_question WHERE userId = :userId AND questionId = :questionId LIMIT 1")
-    UserQuestion getByUserAndQuestion(int userId, int questionId);
 }

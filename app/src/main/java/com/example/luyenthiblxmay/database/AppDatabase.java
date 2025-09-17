@@ -123,7 +123,6 @@ public abstract class AppDatabase extends RoomDatabase {
     };
 
     // Migration 3->4: tạo bảng ExamResult và ExamQuestion
-    // Migration 3->4: tạo bảng ExamResult và ExamQuestion
     static final Migration MIGRATION_3_4 = new Migration(3, 4) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
@@ -194,5 +193,4 @@ public abstract class AppDatabase extends RoomDatabase {
                     "`mo_ta` TEXT)");
         }
     };
-
 }

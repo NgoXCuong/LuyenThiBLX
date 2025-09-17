@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -70,7 +71,7 @@ public class AdminQuestionsAdapter extends RecyclerView.Adapter<AdminQuestionsAd
 
     static class QuestionViewHolder extends RecyclerView.ViewHolder {
         TextView tvQuestion, tvAnswer;
-        Button btnEdit, btnDelete;
+        ImageButton btnEdit, btnDelete;
 
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);

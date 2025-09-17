@@ -30,7 +30,6 @@ import com.example.luyenthiblxmay.view.WrongQuestionsActivity;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     private QuestionController questionController;
     private ProgressBar progressBar;
     private TextView tvProgressPercent, tvProgressDetail;
@@ -116,6 +115,5 @@ public class MainActivity extends AppCompatActivity {
                 tvProgressDetail.setText("Đã hoàn thành " + answered + "/" + total + " câu hỏi");
             }
         });
-
     }
 }

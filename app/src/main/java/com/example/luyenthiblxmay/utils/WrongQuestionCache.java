@@ -12,22 +12,10 @@ public class WrongQuestionCache {
         wrongQuestions.clear();
     }
 
-    public static void addQuestion(Question q) {
-        wrongQuestions.add(q);
-    }
-
     // 👉 thêm hàm addWrongQuestion
     public static void addWrongQuestion(Question q) {
         if (q != null && !wrongQuestions.contains(q)) {
             wrongQuestions.add(q);
-        }
-    }
-
-    public static void addAll(List<Question> questions) {
-        if (questions != null) {
-            for (Question q : questions) {
-                addWrongQuestion(q); // dùng hàm vừa viết để tránh trùng
-            }
         }
     }
 

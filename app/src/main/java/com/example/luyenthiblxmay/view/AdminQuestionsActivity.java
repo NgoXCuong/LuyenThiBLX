@@ -3,10 +3,12 @@ package com.example.luyenthiblxmay.view;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -61,7 +63,6 @@ public class AdminQuestionsActivity extends AppCompatActivity {
         // Thêm mới
         btnAddQuestion.setOnClickListener(v -> showAddEditDialog(null));
     }
-
     private void showAddEditDialog(@Nullable Question question) {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.dialog_add_edit_question, null);
@@ -73,9 +74,19 @@ public class AdminQuestionsActivity extends AppCompatActivity {
         EditText etOptionD = view.findViewById(R.id.etOptionD);
         EditText etAnswer = view.findViewById(R.id.etAnswer);
         EditText etExplanation = view.findViewById(R.id.etExplanation);
-        EditText etCategory = view.findViewById(R.id.etCategory);
+        Spinner spnCategory = view.findViewById(R.id.spnCategory); // Spinner thay cho EditText
         EditText etImage = view.findViewById(R.id.etImage);
 
+        // Gắn adapter cho Spinner
+        ArrayAdapter<CharSequence> adapterCategory = ArrayAdapter.createFromResource(
+                this,
+                R.array.question_categories,   // mảng trong strings.xml
+                android.R.layout.simple_spinner_item
+        );
+        adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnCategory.setAdapter(adapterCategory);
+
+        // Nếu sửa thì set dữ liệu cũ
         if (question != null) {
             etQuestion.setText(question.getQuestion());
             if (question.getOptions() != null) {
@@ -86,8 +97,11 @@ public class AdminQuestionsActivity extends AppCompatActivity {
             }
             etAnswer.setText(question.getAnswer());
             etExplanation.setText(question.getExplanation());
-            etCategory.setText(question.getCategory());
             etImage.setText(question.getImage());
+
+            // chọn đúng loại trong spinner
+            int pos = adapterCategory.getPosition(question.getCategory());
+            if (pos >= 0) spnCategory.setSelection(pos);
         }
 
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -97,7 +111,7 @@ public class AdminQuestionsActivity extends AppCompatActivity {
                     String qText = etQuestion.getText().toString().trim();
                     String ans = etAnswer.getText().toString().trim();
                     String explain = etExplanation.getText().toString().trim();
-                    String category = etCategory.getText().toString().trim();
+                    String category = spnCategory.getSelectedItem().toString(); // lấy từ spinner
                     String image = etImage.getText().toString().trim();
 
                     Map<String, String> options = new HashMap<>();
@@ -128,11 +142,9 @@ public class AdminQuestionsActivity extends AppCompatActivity {
 
                         questionController.updateQuestion(question);
                     }
-                    // Không cần gọi loadQuestions(), LiveData tự cập nhật
                 })
                 .setNegativeButton("Hủy", null)
                 .create();
-
         dialog.show();
     }
 }

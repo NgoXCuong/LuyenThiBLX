@@ -49,9 +49,6 @@
                 android:layout_height="wrap_content"
                 android:text="Mô tả"
                 android:textSize="14sp" />
-
         </LinearLayout>
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

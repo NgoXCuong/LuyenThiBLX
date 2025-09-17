@@ -10,11 +10,15 @@
         android:layout_height="wrap_content"
         android:hint="Tên biển báo" />
 
-    <EditText
-        android:id="@+id/edtLoaiBienBao"
+    <Spinner
+        android:id="@+id/spnLoaiBienBao"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Loại biển báo" />
+        android:layout_height="48dp"
+        android:spinnerMode="dropdown"
+        android:background="@android:drawable/btn_dropdown"
+        android:padding="8dp"
+        android:hint="Loại biển báo"/>
+
 
     <EditText
         android:id="@+id/edtMoTaBienBao"

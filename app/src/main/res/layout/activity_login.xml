@@ -44,7 +44,6 @@
                 android:text="Đăng nhập để tiếp tục"
                 android:textSize="16sp"
                 android:textColor="@color/textSecondary" />
-
         </LinearLayout>
 
         <!-- Form đăng nhập -->
@@ -78,7 +77,6 @@
                         android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:maxLines="1" />
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Mật khẩu -->
@@ -99,7 +97,6 @@
                         android:hint="Mật khẩu"
                         android:inputType="textPassword"
                         android:maxLines="1" />
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Remember Me và Forgot Password -->
@@ -132,10 +129,7 @@
                         android:textColor="@color/colorPrimary"
                         android:padding="8dp"
                         android:background="?android:attr/selectableItemBackground" />
-
                 </LinearLayout>
-
-                <!-- Nút đăng nhập -->
 
                 <!-- Progress bar -->
                 <Button
@@ -157,9 +151,7 @@
                     android:layout_gravity="center"
                     android:visibility="gone"
                     android:indeterminateTint="@color/colorPrimary" />
-
             </LinearLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Divider -->
@@ -190,7 +182,6 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"
                 android:background="@color/white" />
-
         </LinearLayout>
 
         <!-- Nút đăng ký -->
@@ -214,7 +205,6 @@
             android:textColor="@color/black"
             android:gravity="center"
             android:layout_marginTop="5dp" />
-
     </LinearLayout>
 </ScrollView>
 

@@ -3,10 +3,12 @@ package com.example.luyenthiblxmay.view;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -72,16 +74,25 @@ public class AdminBienBaoActivity extends AppCompatActivity {
     private void showAddDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_bienbao, null);
         EditText edtTen = view.findViewById(R.id.edtTenBienBao);
-        EditText edtLoai = view.findViewById(R.id.edtLoaiBienBao);
+        Spinner spnLoai = view.findViewById(R.id.spnLoaiBienBao);
         EditText edtMoTa = view.findViewById(R.id.edtMoTaBienBao);
-        EditText edtHinhAnh = view.findViewById(R.id.edtHinhAnhBienBao); // tên file ảnh trong assets/bienbao/
+        EditText edtHinhAnh = view.findViewById(R.id.edtHinhAnhBienBao);
+
+        // Adapter cho Spinner
+        ArrayAdapter<CharSequence> adapterLoai = ArrayAdapter.createFromResource(
+                this,
+                R.array.loai_bien_bao_array,  // khai báo trong strings.xml
+                android.R.layout.simple_spinner_item
+        );
+        adapterLoai.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnLoai.setAdapter(adapterLoai);
 
         new AlertDialog.Builder(this)
                 .setTitle("Thêm biển báo mới")
                 .setView(view)
                 .setPositiveButton("Thêm", (dialog, which) -> {
                     String ten = edtTen.getText().toString().trim();
-                    String loai = edtLoai.getText().toString().trim();
+                    String loai = spnLoai.getSelectedItem().toString(); // lấy từ spinner
                     String moTa = edtMoTa.getText().toString().trim();
                     String hinhAnh = edtHinhAnh.getText().toString().trim();
 
@@ -99,14 +110,28 @@ public class AdminBienBaoActivity extends AppCompatActivity {
     private void showEditDialog(BienBao bienBao) {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_bienbao, null);
         EditText edtTen = view.findViewById(R.id.edtTenBienBao);
-        EditText edtLoai = view.findViewById(R.id.edtLoaiBienBao);
+        Spinner spnLoai = view.findViewById(R.id.spnLoaiBienBao);
         EditText edtMoTa = view.findViewById(R.id.edtMoTaBienBao);
         EditText edtHinhAnh = view.findViewById(R.id.edtHinhAnhBienBao);
 
         edtTen.setText(bienBao.getTenBienBao());
-        edtLoai.setText(bienBao.getLoaiBienBao());
         edtMoTa.setText(bienBao.getMoTa());
         edtHinhAnh.setText(bienBao.getHinhAnh());
+
+        // Adapter cho spinner
+        ArrayAdapter<CharSequence> adapterLoai = ArrayAdapter.createFromResource(
+                this,
+                R.array.loai_bien_bao_array,
+                android.R.layout.simple_spinner_item
+        );
+        adapterLoai.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnLoai.setAdapter(adapterLoai);
+
+        // Đặt giá trị loại đang có
+        if (bienBao.getLoaiBienBao() != null) {
+            int position = adapterLoai.getPosition(bienBao.getLoaiBienBao());
+            spnLoai.setSelection(position);
+        }
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Sửa biển báo")
@@ -119,7 +144,7 @@ public class AdminBienBaoActivity extends AppCompatActivity {
             Button btnUpdate = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
             btnUpdate.setOnClickListener(v -> {
                 String ten = edtTen.getText().toString().trim();
-                String loai = edtLoai.getText().toString().trim();
+                String loai = spnLoai.getSelectedItem().toString();
                 String moTa = edtMoTa.getText().toString().trim();
                 String hinhAnh = edtHinhAnh.getText().toString().trim();
 

@@ -44,7 +44,6 @@
             android:textStyle="bold"/>
     </RelativeLayout>
 
-
     <!-- Divider -->
     <View
         android:layout_width="match_parent"
@@ -147,5 +146,4 @@
             android:layout_height="wrap_content"
             android:text="Câu tiếp theo" />
     </LinearLayout>
-
 </LinearLayout>

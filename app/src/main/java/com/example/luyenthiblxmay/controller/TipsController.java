@@ -45,13 +45,5 @@ public class TipsController {
     public LiveData<List<Tips>> getAllTips() {
         return tipsDao.getAllTips();
     }
-
-    public LiveData<Tips> getTipById(int id) {
-        return tipsDao.getTipById(id);
-    }
-
-    public LiveData<List<Tips>> searchTipsByTitle(String keyword) {
-        return tipsDao.searchTipsByTitle(keyword);
-    }
 }
 

@@ -24,8 +24,6 @@ public class RegisterActivity extends AppCompatActivity {
     private CheckBox cbTerms;
     private Button btnRegister, btnBackToLogin;
     private ProgressBar progressBar;
-    private TextView tvPasswordStrength;
-
     private UserController userController;
 
     @Override
@@ -50,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnBackToLogin = findViewById(R.id.btnBackToLogin);
         progressBar = findViewById(R.id.progressBar);
-        tvPasswordStrength = findViewById(R.id.tvPasswordStrength);
     }
 
     private void registerUser() {

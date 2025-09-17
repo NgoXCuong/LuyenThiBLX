@@ -37,10 +37,6 @@ public class QuestionController {
         executorService.execute(() -> questionDao.delete(question));
     }
 
-    public void deleteAllQuestions() {
-        executorService.execute(questionDao::deleteAll);
-    }
-
     // Lấy tất cả câu hỏi (LiveData)
     public LiveData<List<Question>> getAllQuestions() {
         return questionDao.getAllQuestions();
@@ -49,11 +45,5 @@ public class QuestionController {
     // Lấy theo category
     public LiveData<List<Question>> getQuestionsByCategory(String category) {
         return questionDao.getQuestionsByCategory(category);
-    }
-
-    public void markQuestionAnswered(int id, boolean answered) {
-        executorService.execute(() -> {
-            questionDao.updateAnswered(id, answered);
-        });
     }
 }

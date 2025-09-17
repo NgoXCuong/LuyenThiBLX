@@ -69,5 +69,4 @@
         android:textColor="@android:color/holo_red_dark"
         android:visibility="gone"
         android:layout_marginTop="6dp" />
-
 </LinearLayout>
