@@ -17,7 +17,7 @@
         <!-- Logo and Title -->
         <ImageView
             android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginBottom="-20dp"
             android:contentDescription="Logo ứng dụng luyện thi A1"
@@ -239,10 +239,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="5dp"
             android:text="© 2025 Ứng dụng luyện thi bằng lái xe máy\nPhiên bản 1.0"
             android:textAlignment="center"
-            android:textColor="@color/textSecondary"
+            android:textColor="@color/black"
             android:textSize="12sp"
             android:alpha="0.8" />
 

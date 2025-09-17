@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient_background">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/admin_main_layout"
@@ -52,7 +51,6 @@
                     android:textColor="@android:color/black"
                     android:alpha="0.9"
                     android:layout_marginTop="2dp" />
-
             </LinearLayout>
 
             <ImageView
@@ -62,7 +60,6 @@
                 android:src="@drawable/ic_logout"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="4dp" />
-
         </LinearLayout>
 
         <!-- Admin Title -->
@@ -71,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trang quản trị"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_gravity="center"
@@ -92,7 +89,80 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_manage_users"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="170dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#FFB74D">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/ic_user" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quản lý người dùng"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="6dp"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Thêm các menu khác tương tự -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_manage_tips"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#4ECDC4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/ic_lightbulb" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Quản lý mẹo"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_manage_questions"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
                 android:layout_columnWeight="1"
                 android:layout_margin="6dp"
                 app:cardCornerRadius="16dp"
@@ -108,106 +178,32 @@
                     android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:src="@drawable/ic_user" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quản lý người dùng"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:layout_marginTop="6dp"
-                        android:textAlignment="center" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Thêm các menu khác tương tự -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_manage_tips"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardBackgroundColor="#4ECDC4">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:src="@drawable/ic_lightbulb" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quản lý mẹo"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:layout_marginTop="6dp"
-                        android:textAlignment="center" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_manage_questions"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardBackgroundColor="#4ECDC4">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
                         android:src="@drawable/ic_book" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Quản lý câu hỏi"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="6dp"
                         android:textAlignment="center" />
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_manage_signs"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="170dp"
                 android:layout_columnWeight="1"
                 android:layout_margin="6dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 android:foreground="?attr/selectableItemBackground"
-                app:cardBackgroundColor="#4ECDC4">
+                app:cardBackgroundColor="#9C27B0">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -217,20 +213,19 @@
                     android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
                         android:src="@drawable/ic_traffic_sign" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Quản lý biển báo"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="6dp"
                         android:textAlignment="center" />
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </GridLayout>
