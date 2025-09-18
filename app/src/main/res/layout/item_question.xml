@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/question_item_bg">
 
     <!-- Nội dung câu hỏi -->
     <TextView
@@ -14,7 +15,8 @@
         android:text="Câu hỏi?"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black" />
+        android:textColor="#1A237E"
+        android:padding="4dp"/>
 
     <!-- Ảnh minh họa nếu có -->
     <ImageView
@@ -23,7 +25,8 @@
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:visibility="gone"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:background="#E0E0E0" /> <!-- nền xám nhạt nếu ảnh không có -->
 
     <!-- Các đáp án -->
     <RadioGroup
@@ -35,34 +38,58 @@
 
         <RadioButton
             android:id="@+id/rbOptionA"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A. Đáp án A" />
+            android:text="A. Đáp án A"
+            android:textColor="#000000"
+            android:background="#FFFFFF"
+            android:padding="8dp"
+            android:layout_marginBottom="4dp"
+            android:buttonTint="#1A237E"/>
 
         <RadioButton
             android:id="@+id/rbOptionB"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="B. Đáp án B" />
+            android:text="B. Đáp án B"
+            android:textColor="#000000"
+            android:background="#FFFFFF"
+            android:padding="8dp"
+            android:layout_marginBottom="4dp"
+            android:buttonTint="#1A237E"/>
 
         <RadioButton
             android:id="@+id/rbOptionC"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="C. Đáp án C" />
+            android:text="C. Đáp án C"
+            android:textColor="#000000"
+            android:background="#FFFFFF"
+            android:padding="8dp"
+            android:layout_marginBottom="4dp"
+            android:buttonTint="#1A237E"/>
 
         <RadioButton
             android:id="@+id/rbOptionD"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="D. Đáp án D" />
+            android:text="D. Đáp án D"
+            android:textColor="#000000"
+            android:background="#FFFFFF"
+            android:padding="8dp"
+            android:layout_marginBottom="4dp"
+            android:buttonTint="#1A237E"/>
     </RadioGroup>
+
+    <!-- Giải thích đáp án -->
     <TextView
         android:id="@+id/tvExplanation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="#D32F2F"
         android:textSize="14sp"
         android:visibility="gone"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:background="#FFF3E0"
+        android:padding="6dp"/>
 </LinearLayout>

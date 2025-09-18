@@ -3,23 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#FAFAFA">
 
+    <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@drawable/header_background"
         android:paddingStart="16dp"
+        android:background="@drawable/header_background"
         android:paddingEnd="16dp">
 
         <ImageView
             android:id="@+id/backButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow_back"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="4dp" />
+            android:padding="5dp" />
 
         <TextView
             android:id="@+id/titleText"
@@ -28,10 +29,10 @@
             android:layout_centerInParent="true"
             android:text="Thi thử"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Thêm đồng hồ đếm ngược -->
+        <!-- Đồng hồ đếm ngược -->
         <TextView
             android:id="@+id/tvTimer"
             android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:text="19:00"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="#FFEB3B"
             android:textSize="16sp"
             android:textStyle="bold"/>
     </RelativeLayout>
@@ -48,7 +49,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#CCCCCC" />
+        android:background="#BDBDBD" />
 
     <!-- Nội dung chính -->
     <ScrollView
@@ -69,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:text="Câu 1/25"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:textColor="#3F51B5"
                 android:layout_marginBottom="8dp" />
 
             <!-- Nội dung câu hỏi -->
@@ -79,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="Nội dung câu hỏi"
                 android:textSize="16sp"
+                android:textColor="#212121"
                 android:layout_marginBottom="8dp" />
 
             <!-- Ảnh minh họa -->
@@ -89,7 +92,8 @@
                 android:layout_marginBottom="12dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:background="#E0E0E0"/>
 
             <!-- Nhóm đáp án -->
             <RadioGroup
@@ -100,27 +104,43 @@
 
                 <RadioButton
                     android:id="@+id/rbOptionA"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="A. " />
+                    android:text="A. "
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:buttonTint="#3F51B5"/>
 
                 <RadioButton
                     android:id="@+id/rbOptionB"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="B. " />
+                    android:text="B. "
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:buttonTint="#3F51B5"/>
 
                 <RadioButton
                     android:id="@+id/rbOptionC"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="C. " />
+                    android:text="C. "
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:buttonTint="#3F51B5"/>
 
                 <RadioButton
                     android:id="@+id/rbOptionD"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="D. " />
+                    android:text="D. "
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:buttonTint="#3F51B5"/>
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
@@ -131,19 +151,27 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="12dp">
+        android:padding="12dp"
+        android:background="#EEEEEE">
 
         <Button
             android:id="@+id/btnSubmit"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Nộp bài"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FF5722"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Câu tiếp theo" />
+            android:layout_weight="1"
+            android:text="Câu tiếp theo"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="8dp"/>
     </LinearLayout>
 </LinearLayout>

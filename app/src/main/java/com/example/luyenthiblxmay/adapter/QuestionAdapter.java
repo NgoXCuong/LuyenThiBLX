@@ -21,6 +21,7 @@ import com.example.luyenthiblxmay.model.UserQuestion;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -82,16 +83,21 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             holder.imgQuestion.setVisibility(View.GONE);
         }
 
-        // Hiển thị đáp án
-        holder.rbA.setVisibility(View.GONE);
-        holder.rbB.setVisibility(View.GONE);
-        holder.rbC.setVisibility(View.GONE);
-        holder.rbD.setVisibility(View.GONE);
-        if (question.getOptions() != null) {
-            if (question.getOptions().containsKey("A")) { holder.rbA.setText("A. " + question.getOptions().get("A")); holder.rbA.setVisibility(View.VISIBLE);}
-            if (question.getOptions().containsKey("B")) { holder.rbB.setText("B. " + question.getOptions().get("B")); holder.rbB.setVisibility(View.VISIBLE);}
-            if (question.getOptions().containsKey("C")) { holder.rbC.setText("C. " + question.getOptions().get("C")); holder.rbC.setVisibility(View.VISIBLE);}
-            if (question.getOptions().containsKey("D")) { holder.rbD.setText("D. " + question.getOptions().get("D")); holder.rbD.setVisibility(View.VISIBLE);}
+        List<RadioButton> options = Arrays.asList(holder.rbA, holder.rbB, holder.rbC, holder.rbD);
+        String[] keys = {"A","B","C","D"};
+
+        for (int i = 0; i < options.size(); i++) {
+            RadioButton rb = options.get(i);
+            String key = keys[i];
+            if (question.getOptions() != null
+                    && question.getOptions().containsKey(key)
+                    && question.getOptions().get(key) != null
+                    && !question.getOptions().get(key).trim().isEmpty()) {
+                rb.setText(key + ". " + question.getOptions().get(key));
+                rb.setVisibility(View.VISIBLE);
+            } else {
+                rb.setVisibility(View.GONE);
+            }
         }
 
         // Reset radioGroup
