@@ -16,10 +16,12 @@ import androidx.lifecycle.Observer;
 import androidx.room.Room;
 
 import com.example.luyenthiblxmay.controller.QuestionController;
+import com.example.luyenthiblxmay.controller.UserQuestionController;
 import com.example.luyenthiblxmay.dao.UserDao;
 import com.example.luyenthiblxmay.database.AppDatabase;
 import com.example.luyenthiblxmay.model.Question;
 import com.example.luyenthiblxmay.model.User;
+import com.example.luyenthiblxmay.model.UserQuestion;
 import com.example.luyenthiblxmay.view.BienBaoActivity;
 import com.example.luyenthiblxmay.view.ExamTestActivity;
 import com.example.luyenthiblxmay.view.LoginActivity;
@@ -30,9 +32,12 @@ import com.example.luyenthiblxmay.view.WrongQuestionsActivity;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private QuestionController questionController;
     private ProgressBar progressBar;
-    private TextView tvProgressPercent, tvProgressDetail;
+    private TextView tvProgressPercent, tvProgressDetail, tvUserInfo;
+
+    private QuestionController questionController;
+    private UserQuestionController userQuestionController;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +52,12 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // --- Lấy layout các module ---
+        // Layout các module
         LinearLayout layoutMeoHocTap = findViewById(R.id.layoutMeoHocTap);
         LinearLayout layoutHocLyThuyet = findViewById(R.id.layoutHocLyThuyet);
         LinearLayout layoutThiThu = findViewById(R.id.layoutThithu);
         LinearLayout layoutCauSai = findViewById(R.id.layoutCauSai);
         LinearLayout layoutBienBao = findViewById(R.id.layoutBienBao);
-
 
         layoutMeoHocTap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TipsActivity.class)));
         layoutHocLyThuyet.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ModuleActivity.class)));
@@ -61,23 +65,36 @@ public class MainActivity extends AppCompatActivity {
         layoutCauSai.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, WrongQuestionsActivity.class)));
         layoutBienBao.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BienBaoActivity.class)));
 
-        // --- Hiển thị thông tin user ---
+        // --- Lấy userId ---
+        userId = getIntent().getIntExtra("user_id", -1);
+        if (userId == -1) {
+            userId = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    .getInt("user_id", -1);
+        }
+
+        if (userId == -1) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
+        // --- Khởi tạo DB và lấy thông tin user ---
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                         AppDatabase.class, "app_thi_blx")
                 .allowMainThreadQueries()
                 .build();
 
         UserDao userDao = db.userDao();
-        int userId = getIntent().getIntExtra("user_id", -1);
-        TextView textView = findViewById(R.id.textViewFullName);
+        User user = userDao.getUserById(userId);
 
-        if (userId != -1) {
-            User user = userDao.getUserById(userId);
-            textView.setText(user != null ? user.getFullName() : "User không tồn tại");
+        tvUserInfo = findViewById(R.id.textViewFullName);
+        if (user != null) {
+            tvUserInfo.setText("ID: " + user.getId() + " - " + user.getFullName());
         } else {
-            textView.setText("ID không hợp lệ");
+            tvUserInfo.setText("User không tồn tại");
         }
 
+        // --- Logout ---
         ImageView logoutBtn = findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> {
             getSharedPreferences("user_prefs", MODE_PRIVATE).edit().clear().apply();
@@ -93,27 +110,42 @@ public class MainActivity extends AppCompatActivity {
         tvProgressDetail = findViewById(R.id.tvProgressDetail);
 
         questionController = new QuestionController(getApplication());
-        questionController.getAllQuestions().observe(this, new Observer<List<Question>>() {
-            @Override
-            public void onChanged(List<Question> questions) {
-                if (questions == null || questions.isEmpty()) {
-                    progressBar.setProgress(0);
-                    tvProgressPercent.setText("0%");
-                    tvProgressDetail.setText("Chưa có câu hỏi nào");
-                    return;
-                }
+        userQuestionController = new UserQuestionController(getApplication());
+    }
 
-                int total = questions.size();
-                int answered = 0;
-                for (Question q : questions) {
-                    if (q.isAnswered()) answered++;
-                }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Quan sát tiến độ của user khi activity hiển thị lại
+        userQuestionController.getUserQuestionsByUser(userId)
+                .observe(this, this::updateTotalProgress);
+    }
 
-                int percent = (int) ((answered * 100.0f) / total);
-                progressBar.setProgress(percent);
-                tvProgressPercent.setText(percent + "%");
-                tvProgressDetail.setText("Đã hoàn thành " + answered + "/" + total + " câu hỏi");
+    private void updateTotalProgress(List<UserQuestion> userQuestions) {
+        questionController.getAllQuestions().observe(this, questions -> {
+            if (questions == null || questions.isEmpty()) {
+                progressBar.setProgress(0);
+                tvProgressPercent.setText("0%");
+                tvProgressDetail.setText("Chưa có câu hỏi nào");
+                return;
             }
+
+            int total = questions.size();
+            int answered = 0;
+
+            for (Question q : questions) {
+                for (UserQuestion uq : userQuestions) {
+                    if (uq.getQuestionId() == q.getId() && uq.isAnswered()) {
+                        answered++;
+                        break;
+                    }
+                }
+            }
+
+            int percent = (int) ((answered * 100.0f) / total);
+            progressBar.setProgress(percent);
+            tvProgressPercent.setText(percent + "%");
+            tvProgressDetail.setText("Đã hoàn thành " + answered + "/" + total + " câu hỏi");
         });
     }
 }

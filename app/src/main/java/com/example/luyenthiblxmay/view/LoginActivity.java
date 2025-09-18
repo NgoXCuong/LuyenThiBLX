@@ -81,18 +81,23 @@ public class LoginActivity extends AppCompatActivity {
 
             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
             if (success && user != null) {
+                // Lưu vào SharedPreferences
+                getSharedPreferences("user_prefs", MODE_PRIVATE)
+                        .edit()
+                        .putInt("user_id", user.getId())
+                        .apply();
+
                 Intent intent;
                 if (user.isAdmin()) {
-                    // 👉 Nếu là admin thì vào AdminDashboardActivity
                     intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                 } else {
-                    // 👉 Nếu là user thì vào MainActivity
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                 }
                 intent.putExtra("user_id", user.getId());
                 startActivity(intent);
                 finish();
             }
+
         }));
     }
 }

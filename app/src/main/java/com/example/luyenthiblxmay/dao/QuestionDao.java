@@ -9,6 +9,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.luyenthiblxmay.model.Question;
+import com.example.luyenthiblxmay.model.User;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface QuestionDao {
 
     @Query("DELETE FROM questions")
     void deleteAll();
+
+    @Query("SELECT * FROM questions WHERE id = :id LIMIT 1")
+    Question getQuestionById(int id);
 
     @Query("SELECT * FROM questions ORDER BY id ASC")
     LiveData<List<Question>> getAllQuestions();

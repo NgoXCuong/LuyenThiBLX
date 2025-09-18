@@ -8,11 +8,11 @@ public class UserLearningProgress {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int userId;
-    private String category; // chủ đề
-    private int lastQuestionId; // câu cuối cùng đã học
+    private String category;
+    private int lastQuestionId;
     private long updatedAt;
 
-    // getters và setters
+    // Getter & Setter
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

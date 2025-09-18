@@ -25,7 +25,6 @@ import java.util.concurrent.Executors;
                 ExamResult.class,
                 ExamQuestion.class,
                 UserQuestion.class,
-                UserLearningProgress.class,
                 BienBao.class
         },
         version = 6,
@@ -33,14 +32,16 @@ import java.util.concurrent.Executors;
 )
 @TypeConverters({AppDatabase.Converters.class, OptionsConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
+
     private static volatile AppDatabase INSTANCE;
+
     public abstract UserDao userDao();
     public abstract TipsDao tipsDao();
     public abstract QuestionDao questionDao();
     public abstract ExamResultDao examResultDao();
     public abstract ExamQuestionDao examQuestionDao();
     public abstract UserQuestionDao userQuestionDao();
-    public abstract  BienBaoDao bienBaoDao();
+    public abstract BienBaoDao bienBaoDao();
 
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -51,7 +52,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                     AppDatabase.class,
                                     "app_thi_blx"
                             )
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+                            .fallbackToDestructiveMigration() // Xóa DB cũ nếu verify schema fail
                             .addCallback(new Callback() {
                                 @Override
                                 public void onOpen(@NonNull SupportSQLiteDatabase db) {
@@ -77,6 +78,7 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+
     public static void destroyInstance() {
         INSTANCE = null;
     }
@@ -94,7 +96,8 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     }
 
-    // Migration 1->2: tạo bảng tips
+    // ================= Migrations =================
+
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
@@ -105,7 +108,6 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-    // Migration 2->3: tạo bảng questions
     static final Migration MIGRATION_2_3 = new Migration(2, 3) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
@@ -122,11 +124,10 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-    // Migration 3->4: tạo bảng ExamResult và ExamQuestion
     static final Migration MIGRATION_3_4 = new Migration(3, 4) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            // Tạo ExamResult trước, vì ExamQuestion FK vào nó
+            // ExamResult
             database.execSQL("CREATE TABLE IF NOT EXISTS `exam_result` (" +
                     "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     "`userId` INTEGER NOT NULL, " +
@@ -137,7 +138,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     "FOREIGN KEY(`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE)");
             database.execSQL("CREATE INDEX IF NOT EXISTS `index_exam_result_userId` ON `exam_result`(`userId`)");
 
-            // Tạo ExamQuestion sau, vì FK vào ExamResult và Question
+            // ExamQuestion
             database.execSQL("CREATE TABLE IF NOT EXISTS `exam_question` (" +
                     "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     "`examId` INTEGER NOT NULL, " +
@@ -151,37 +152,27 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-
-    // Migration 4->5: tạo bảng UserQuestion và UserLearningProgress + index
     static final Migration MIGRATION_4_5 = new Migration(4, 5) {
         @Override
-        public void migrate(@NonNull SupportSQLiteDatabase database) {
-            // UserQuestion
-            database.execSQL("CREATE TABLE IF NOT EXISTS `user_question` (" +
-                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+        public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS `user_question` (" +
                     "`userId` INTEGER NOT NULL, " +
                     "`questionId` INTEGER NOT NULL, " +
                     "`isAnswered` INTEGER NOT NULL DEFAULT 0, " +
                     "`selectedAnswer` TEXT, " +
+                    "`isCorrect` INTEGER NOT NULL DEFAULT 0, " +
                     "`answeredAt` INTEGER, " +
+                    "PRIMARY KEY(`userId`, `questionId`), " +
                     "FOREIGN KEY(`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE, " +
-                    "FOREIGN KEY(`questionId`) REFERENCES `questions`(`id`) ON DELETE CASCADE)");
-            database.execSQL("CREATE INDEX IF NOT EXISTS `index_user_question_userId` ON `user_question`(`userId`)");
-            database.execSQL("CREATE INDEX IF NOT EXISTS `index_user_question_questionId` ON `user_question`(`questionId`)");
-
-            // UserLearningProgress
-            database.execSQL("CREATE TABLE IF NOT EXISTS `user_learning_progress` (" +
-                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    "`userId` INTEGER NOT NULL, " +
-                    "`category` TEXT, " +
-                    "`lastQuestionId` INTEGER, " +
-                    "`updatedAt` INTEGER, " +
-                    "FOREIGN KEY(`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE)");
-            database.execSQL("CREATE INDEX IF NOT EXISTS `index_user_learning_progress_userId` ON `user_learning_progress`(`userId`)");
+                    "FOREIGN KEY(`questionId`) REFERENCES `questions`(`id`) ON DELETE CASCADE" +
+                    ")");
+            db.execSQL("CREATE INDEX IF NOT EXISTS `index_user_question_userId` ON `user_question`(`userId`)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS `index_user_question_questionId` ON `user_question`(`questionId`)");
         }
     };
 
-    // Migration 5->6: tạo bảng BienBao
+
+
     static final Migration MIGRATION_5_6 = new Migration(5, 6) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {

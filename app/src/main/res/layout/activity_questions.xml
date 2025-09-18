@@ -39,6 +39,41 @@
         android:layout_height="1dp"
         android:background="#404040" />
 
+    <!-- Progress layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã làm: 0 / 0"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/tvCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đúng: 0 / 0"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="2dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="4dp"
+            android:progress="0"
+            android:max="100"
+            android:progressTint="@color/black"
+            android:backgroundTint="#cccccc"/>
+    </LinearLayout>
 
     <!-- RecyclerView hiển thị câu hỏi -->
     <androidx.recyclerview.widget.RecyclerView

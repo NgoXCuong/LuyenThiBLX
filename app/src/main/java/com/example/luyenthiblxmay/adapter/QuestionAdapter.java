@@ -14,34 +14,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.luyenthiblxmay.R;
-import com.example.luyenthiblxmay.controller.QuestionController;
+import com.example.luyenthiblxmay.controller.UserQuestionController;
 import com.example.luyenthiblxmay.model.Question;
+import com.example.luyenthiblxmay.model.UserQuestion;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
+
+    public interface ProgressUpdateListener {
+        void onProgressUpdated();
+    }
+
     private final Context context;
     private List<Question> questions;
-    private final QuestionController questionController;
+    private final int userId;
+    private final UserQuestionController userQuestionController;
+    private Map<Integer, UserQuestion> userProgressMap;
+    private final ProgressUpdateListener progressListener;
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
-    public QuestionAdapter(Context context, List<Question> questions) {
+    public QuestionAdapter(Context context, List<Question> questions, int userId,
+                           Map<Integer, UserQuestion> userProgressMap,
+                           ProgressUpdateListener progressListener) {
         this.context = context;
         this.questions = questions;
-        this.questionController = new QuestionController(((android.app.Application) context.getApplicationContext()));
+        this.userId = userId;
+        this.userQuestionController = new UserQuestionController(context);
+        this.userProgressMap = userProgressMap;
+        this.progressListener = progressListener;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(List<Question> questions, Map<Integer, UserQuestion> progressMap) {
         this.questions = questions;
+        this.userProgressMap = progressMap;
         notifyDataSetChanged();
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
     }
 
     @NonNull
@@ -54,120 +67,118 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         Question question = questions.get(position);
-
-        // Nội dung câu hỏi
         holder.tvQuestionText.setText("Câu " + (position + 1) + ": " + question.getQuestion());
 
-        // Ảnh minh họa
+        // Hiển thị ảnh nếu có
         if (question.getImage() != null && !question.getImage().trim().isEmpty()) {
             holder.imgQuestion.setVisibility(View.VISIBLE);
-            try {
-                InputStream inputStream = context.getAssets().open(question.getImage());
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            try (InputStream is = context.getAssets().open(question.getImage())) {
+                Bitmap bitmap = BitmapFactory.decodeStream(is);
                 holder.imgQuestion.setImageBitmap(bitmap);
-                inputStream.close();
             } catch (IOException e) {
                 holder.imgQuestion.setVisibility(View.GONE);
-                e.printStackTrace();
             }
         } else {
             holder.imgQuestion.setVisibility(View.GONE);
         }
 
-        // Ẩn tất cả option trước
+        // Hiển thị đáp án
         holder.rbA.setVisibility(View.GONE);
         holder.rbB.setVisibility(View.GONE);
         holder.rbC.setVisibility(View.GONE);
         holder.rbD.setVisibility(View.GONE);
-
-        // Các đáp án
-        Map<String, String> options = question.getOptions();
-        if (options != null) {
-            if (options.containsKey("A") && options.get("A") != null && !options.get("A").trim().isEmpty()) {
-                holder.rbA.setText("A. " + options.get("A"));
-                holder.rbA.setVisibility(View.VISIBLE);
-            }
-            if (options.containsKey("B") && options.get("B") != null && !options.get("B").trim().isEmpty()) {
-                holder.rbB.setText("B. " + options.get("B"));
-                holder.rbB.setVisibility(View.VISIBLE);
-            }
-            if (options.containsKey("C") && options.get("C") != null && !options.get("C").trim().isEmpty()) {
-                holder.rbC.setText("C. " + options.get("C"));
-                holder.rbC.setVisibility(View.VISIBLE);
-            }
-            if (options.containsKey("D") && options.get("D") != null && !options.get("D").trim().isEmpty()) {
-                holder.rbD.setText("D. " + options.get("D"));
-                holder.rbD.setVisibility(View.VISIBLE);
-            }
+        if (question.getOptions() != null) {
+            if (question.getOptions().containsKey("A")) { holder.rbA.setText("A. " + question.getOptions().get("A")); holder.rbA.setVisibility(View.VISIBLE);}
+            if (question.getOptions().containsKey("B")) { holder.rbB.setText("B. " + question.getOptions().get("B")); holder.rbB.setVisibility(View.VISIBLE);}
+            if (question.getOptions().containsKey("C")) { holder.rbC.setText("C. " + question.getOptions().get("C")); holder.rbC.setVisibility(View.VISIBLE);}
+            if (question.getOptions().containsKey("D")) { holder.rbD.setText("D. " + question.getOptions().get("D")); holder.rbD.setVisibility(View.VISIBLE);}
         }
 
-        // Reset RadioGroup
+        // Reset radioGroup
         holder.radioGroup.setOnCheckedChangeListener(null);
         holder.radioGroup.clearCheck();
         holder.tvExplanation.setVisibility(View.GONE);
 
-        // Nếu đã chọn đáp án trước đó → đánh dấu + hiện giải thích
-        if (question.getSelectedAnswer() != null) {
+        // Load trạng thái câu trả lời từ snapshot
+        UserQuestion uq = userProgressMap != null ? userProgressMap.get(question.getId()) : null;
+        if (uq != null && uq.isAnswered()) {
+            question.setAnswered(true);
+            question.setSelectedAnswer(uq.getSelectedAnswer());
             checkAnswer(holder, question);
         }
 
-        // Khi user chọn đáp án mới
+        // Xử lý chọn đáp án
         holder.radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            String selected = null;
-            if (checkedId == holder.rbA.getId()) selected = "A";
-            else if (checkedId == holder.rbB.getId()) selected = "B";
-            else if (checkedId == holder.rbC.getId()) selected = "C";
-            else if (checkedId == holder.rbD.getId()) selected = "D";
+            String sel = null;
+            if (checkedId == holder.rbA.getId()) sel = "A";
+            else if (checkedId == holder.rbB.getId()) sel = "B";
+            else if (checkedId == holder.rbC.getId()) sel = "C";
+            else if (checkedId == holder.rbD.getId()) sel = "D";
 
-            if (selected != null) {
-                question.setSelectedAnswer(selected);
+            if (sel != null) {
+                final String selectedAnswer = sel;
+                question.setSelectedAnswer(selectedAnswer);
                 question.setAnswered(true);
 
-                // Lưu tiến độ
-                questionController.updateQuestion(question);
+                boolean isCorrect = selectedAnswer.equals(question.getAnswer());
 
-                // Hiển thị giải thích
+                // Lưu vào database
+                executor.execute(() -> userQuestionController.saveAnswer(
+                        userId,
+                        question.getId(),
+                        selectedAnswer,
+                        isCorrect
+                ));
+
+                // Cập nhật snapshot
+                if (userProgressMap != null) {
+                    UserQuestion newUq = new UserQuestion(
+                            userId,
+                            question.getId(),
+                            true,
+                            selectedAnswer,
+                            isCorrect,
+                            System.currentTimeMillis()
+                    );
+                    userProgressMap.put(question.getId(), newUq);
+                }
+
                 checkAnswer(holder, question);
+
+                if (progressListener != null) progressListener.onProgressUpdated();
             }
         });
+
     }
 
-    // Hiển thị giải thích
     private void checkAnswer(QuestionViewHolder holder, Question question) {
         String selected = question.getSelectedAnswer();
         if (selected == null) return;
 
-        // Tick đáp án đã chọn
-        if ("A".equals(selected)) holder.rbA.setChecked(true);
-        else if ("B".equals(selected)) holder.rbB.setChecked(true);
-        else if ("C".equals(selected)) holder.rbC.setChecked(true);
-        else if ("D".equals(selected)) holder.rbD.setChecked(true);
+        holder.rbA.setChecked("A".equals(selected));
+        holder.rbB.setChecked("B".equals(selected));
+        holder.rbC.setChecked("C".equals(selected));
+        holder.rbD.setChecked("D".equals(selected));
 
-        // Hiển thị giải thích
         if (selected.equals(question.getAnswer())) {
-            String explanation = (question.getExplanation() != null && !question.getExplanation().trim().isEmpty())
-                    ? "✔ Đúng! " + question.getExplanation()
-                    : "✔ Đúng!";
-            holder.tvExplanation.setText(explanation);
             holder.tvExplanation.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
+            holder.tvExplanation.setText("✔ Đúng! " + (question.getExplanation() != null ? question.getExplanation() : ""));
         } else {
             String correctOption = question.getAnswer();
             if (question.getOptions() != null && question.getOptions().get(correctOption) != null) {
                 correctOption += ". " + question.getOptions().get(correctOption);
             }
-            String explanation = (question.getExplanation() != null && !question.getExplanation().trim().isEmpty())
-                    ? "\n💡 " + question.getExplanation()
-                    : "";
-            holder.tvExplanation.setText("✘ Sai! Đáp án đúng: " + correctOption + explanation);
             holder.tvExplanation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+            holder.tvExplanation.setText("✘ Sai! Đáp án đúng: " + correctOption + "\n" +
+                    (question.getExplanation() != null ? question.getExplanation() : ""));
         }
+
         holder.tvExplanation.setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public int getItemCount() {
-        return (questions != null) ? questions.size() : 0;
+        return questions != null ? questions.size() : 0;
     }
 
     static class QuestionViewHolder extends RecyclerView.ViewHolder {
@@ -179,14 +190,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             tvQuestionText = itemView.findViewById(R.id.tvQuestionText);
+            tvExplanation = itemView.findViewById(R.id.tvExplanation);
             imgQuestion = itemView.findViewById(R.id.imgQuestion);
             radioGroup = itemView.findViewById(R.id.radioGroupOptions);
             rbA = itemView.findViewById(R.id.rbOptionA);
             rbB = itemView.findViewById(R.id.rbOptionB);
             rbC = itemView.findViewById(R.id.rbOptionC);
             rbD = itemView.findViewById(R.id.rbOptionD);
-            tvExplanation = itemView.findViewById(R.id.tvExplanation);
         }
     }
 }
-
