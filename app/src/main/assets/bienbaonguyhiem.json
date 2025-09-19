@@ -1,0 +1,174 @@
+[
+
+  {
+    "tenbienbao": "Biển báo W.201a: Chỗ ngoặt nguy hiểm vòng bên trái.",
+    "loaibienbao": "Nguy hiem",
+    "mota": "Báo trước sắp tới chỗ ngoặt vòng bên trái.",
+    "hinhanh": "bienbao/chongoatnguyhiemvongbentrai.jpg"
+  },{
+  "tenbienbao": "Biển báo W.201b: Chỗ ngoặt nguy hiểm vòng bên phải.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước sắp tới chỗ ngoặt vòng bên phải.",
+  "hinhanh": "bienbao/chongoatnguyhiemvongbenphai.jpg"
+},{
+  "tenbienbao": "Biển báo W.201c: Chỗ ngoặt nguy hiểm có nguy cơ lật xe bên phải.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước sắp tới chỗ ngoặt nguy hiểm có nguy cơ lật xe bên phải khi đường cong vòng sang trái.",
+  "hinhanh": "bienbao/chongoatnguyhiemconguycolatxebenphai.jpg"
+},{
+  "tenbienbao": "Biển báo W.201d: Chỗ ngoặt nguy hiểm có nguy cơ lật xe bên trái.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước sắp tới chỗ ngoặt nguy hiểm có nguy cơ lật xe bên trái khi đường cong vòng sang phải",
+  "hinhanh": "bienbao/chongoatnguyhiemconguycolatxebentrai.jpg"
+},{
+  "tenbienbao": "Biển báo W.202a: Hai chỗ ngoặt ngược chiều nhau liên tiếp bên trái.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước có từ 2 chỗ ngoặt, ở gần nhau trong đó có ít nhất một chỗ ngoặt nguy hiểm mà chỗ ngoặt đầu tiên hướng vòng bên trái.",
+  "hinhanh": "bienbao/haichongoatnguochieunhaubentrai.jpg"
+},{
+  "tenbienbao": "Biển báo W.202b: Hai chỗ ngoặt ngược chiều nhau liên tiếp bên phải.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước có từ 2 chỗ ngoặt, ở gần nhau trong đó có ít nhất một chỗ ngoặt nguy hiểm mà chỗ ngoặt đầu tiên hướng vòng bên phải.",
+  "hinhanh": "bienbao/haichongoatnguochieunhaubenphai.jpg"
+},{
+  "tenbienbao": "Biển báo W.203a: Đường bị thu hẹp cả hai bên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước đường sắp bị thu hẹp cả hai bên.",
+  "hinhanh": "bienbao/duongthuhepca2ben.jpg"
+},{
+  "tenbienbao": "Biển báo W.203b: Đường bị thu hẹp bên trái.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước đường bị hẹp phía bên trái.",
+  "hinhanh": "bienbao/duongthuhepbentrai.jpg"
+},{
+  "tenbienbao": "Biển báo W.203c: Đường bị thu hẹp bên phải.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước đường bị hẹp phía bên phải.",
+  "hinhanh": "bienbao/duongthuhepbenphai.jpg"
+},{
+  "tenbienbao": "Biển báo W.204: Đường 2 chiều.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo đoạn đường phía trước do sửa chữa hoặc có trở ngại khác nên phải đi vào phần đường còn lại hoặc đường tạm theo cả 2 chiều.",
+  "hinhanh": "bienbao/duong2chieu.png"
+},{
+  "tenbienbao": "Biển báo W.207a: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutien.jpg"
+},{
+  "tenbienbao": "Biển báo W.207b: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở bên phải.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutienb.jpg"
+},{
+  "tenbienbao": "Biển báo W.207c: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở bên trái.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutienc.jpg"
+},{
+  "tenbienbao": "Biển báo W.207d: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên liên tiếp.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutiend.jpg"
+},{
+  "tenbienbao": "Biển báo W.207e: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên liên tiếp.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutiene.jpg"
+},{
+  "tenbienbao": "Biển báo W.207f: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở bên trái.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutienf.jpg"
+},{
+  "tenbienbao": "Biển báo W.207g: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở bên phải.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutieng.jpg"
+},{
+  "tenbienbao": "Biển báo W.207h: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở bên phải.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutienh.jpg"
+},{
+  "tenbienbao": "Biển báo W.207i: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở bên phải và phía trước.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutieni.jpg"
+},{
+  "tenbienbao": "Biển báo W.207k: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở phía trước.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutienk.jpg"
+},{
+  "tenbienbao": "Biển báo W.207l: Giao nhau với đường không ưu tiên.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Đặt trên đường ưu tiên, để báo trước sắp đến nơi giao nhau với đường không ưu tiên ở bên trái và phía trước.",
+  "hinhanh": "bienbao/giaonhauvoiduongkhonguutienl.jpg"
+},{
+  "tenbienbao": "Biển báo W.211b: Giao nhau cùng mức với đường tàu điện.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước sắp đến chỗ giao nhau giao nhau cùng mức với đường tàu điện.",
+  "hinhanh": "bienbao/giaovoitaudien.jpg"
+},{
+  "tenbienbao": "Biển báo W.212: Cầu hẹp.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo cầu phía trước là loại cầu có chiều rộng phần xe chạy nhỏ hơn hoặc bằng 1 làn đường (4,5m). Các xe khi lưu thông qua loại cầu này phải nhường nhau và chờ ở 2 đầu cầu.",
+  "hinhanh": "bienbao/cauhep.jpg"
+},{
+  "tenbienbao": "Biển báo W.213: Cầu tạm",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo cầu phía trước là loại cầu tạm, được làm để sử dụng tạm thời cho xe qua lại.",
+  "hinhanh": "bienbao/cautam.jpg"
+},{
+  "tenbienbao": "Biển báo W.214: Cầu xoay – cầu cất",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo cầu phía trước là loại cầu xoay, cầu cất là những loại cầu trong từng khoảng thời gian có ngắt giao thông đường bộ để cho tàu thuyền qua lại. Các phương tiện đi trên đường bộ phải chờ đợi để đi qua.",
+  "hinhanh": "bienbao/cauxoaycaudat.png"
+},{
+  "tenbienbao": "Biển báo W.215a: Kè – vực sâu phía trước.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo phía trước có bờ kè, vực sâu, hoặc bờ sông áp sát đường phía trước, cần đề phòng tình huống nguy hiểm vượt kè, rơi  xuống vực sâu (thường cắm ở những chỗ ngoặt nguy hiểm).",
+  "hinhanh": "bienbao/kevucsauphiatruoca.jpg"
+},{
+  "tenbienbao": "Biển báo W.215b: Kè – vực sâu phía trước.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo phía trước có bờ kè, vực sâu, hoặc bờ sông áp sát đường phía bên phải, cần đề phòng tình huống nguy hiểm vượt kè, rơi  xuống vực sâu (thường cắm ở những chỗ ngoặt nguy hiểm).",
+  "hinhanh": "bienbao/kevucsauphiatruocb.jpg"
+},{
+  "tenbienbao": "Biển báo W.215c: Kè – vực sâu phía trước.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo phía trước có bờ kè, vực sâu, hoặc bờ sông áp sát đường phía bên trái, cần đề phòng tình huống nguy hiểm vượt kè, rơi  xuống vực sâu (thường cắm ở những chỗ ngoặt nguy hiểm).",
+  "hinhanh": "bienbao/kevucsauphiatruocc.jpg"
+},{
+  "tenbienbao": "Biển báo W.216a: Đường ngầm",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước những chỗ có đường ngầm (đường tràn). Đường ngầm là những đoạn đường vượt qua sông, suối, khe cạn mà nước có thể chảy tràn qua mặt đường thường xuyên.",
+  "hinhanh": "bienbao/duongngam.jpg"
+},{
+  "tenbienbao": "Biển báo W.216b: Đường ngầm có nguy cơ lũ quét",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước những chỗ có đường ngầm (đường tràn). Đường ngầm là những đoạn đường vượt qua sông, suối, khe cạn mà nước có thể chảy tràn qua mặt đường thường xuyên có nguy cơ có lũ quét.",
+  "hinhanh": "bienbao/duongngamconguycoluquet.jpg"
+},{
+  "tenbienbao": "Biển báo W.217: Bến phà",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước sắp đến bến phà.",
+  "hinhanh": "bienbao/benpha.jpg"
+},{
+  "tenbienbao": "Biển báo W.220: Dốc lên nguy hiểm.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước sắp lên dốc nguy  hiểm,người điều khiển phương tiện phải chọn cách chạy phù hợp để đảm bảo an toàn.",
+  "hinhanh": "bienbao/doclennguyhiem.jpg"
+},{
+  "tenbienbao": "Biển báo W.221a: Đường không bằng phẳng.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước sắp tới đoạn đường có mặt đường không bằng phẳng, lồi lõm, sống trâu,… xe chạy với tốc độ cao sẽ bị nguy hiểm.",
+  "hinhanh": "bienbao/duongkhongbangphang.jpg"
+},{
+  "tenbienbao": "Biển báo W.222a: Đường trơn.",
+  "loaibienbao": "Nguy hiem",
+  "mota": "Báo trước  sắp tới đoạn đường có thể xảy ra trơn trượt khi thời tiết xấu, cần tránh hãm phanh, tăng ga, sang số đột ngột hoặc xe chạy với tốc độ cao sẽ gặp nguy hiểm. Khi gặp biển báo này người điều khiển phương tiện phải giảm tốc độ xe chạy và thận trọng.",
+  "hinhanh": "bienbao/duongtron.jpg"
+}
+]
