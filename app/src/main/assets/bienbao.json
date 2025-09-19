@@ -1,0 +1,447 @@
+[{
+  "tenbienbao": "Biển số P.106c “Cấm các xe chở hàng nguy hiểm”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các xe chở hàng nguy hiểm.",
+  "hinhanh": "bienbao/camcacxechohangnguyhiem.png"
+},
+{
+  "tenbienbao": "Biển số P.101 “Đường cấm”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại phương tiện đi lại cả hai hướng, trừ các xe được ưu tiên theo quy định.",
+  "hinhanh": "bienbao/duongcam.png"
+
+},
+{
+  "tenbienbao": "Biển số P.102 “Cấm đi ngược chiều”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe (cơ giới và thô sơ) đi vào theo chiều đặt biển, trừ các xe được ưu tiên theo quy định; người đi bộ được phép đi trên vỉa hè hoặc lề đường.",
+  "hinhanh": "bienbao/camdinguochieu.png"
+
+}
+  ,{
+  "tenbienbao": "Biển số P.103a “Cấm xe ô tô”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe cơ giới kể cả xe máy 3 bánh có thùng đi qua, trừ xe máy 2 bánh, xe gắn máy và các xe được ưu tiên theo quy định.",
+  "hinhanh": "bienbao/camxeoto.png"
+
+}
+  ,{
+  "tenbienbao": "Biển số P.103b “Cấm xe ô tô rẽ phải”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe cơ giới kể cả xe máy 3 bánh có thùng rẽ phải, trừ xe máy 2 bánh, xe gắn máy và các xe được ưu tiên theo quy định.",
+  "hinhanh": "bienbao/camxeotorephai.png"
+
+}
+  ,{
+  "tenbienbao": "Biển số P.103c \"Cấm xe ô tô rẽ trái\"",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe cơ giới kể cả xe máy 3 bánh có thùng rẽ trái, trừ xe máy 2 bánh, xe gắn máy và các xe được ưu tiên theo quy định.",
+  "hinhanh": "bienbao/camxeotoretrai.png"
+
+},
+  {
+  "tenbienbao": "Biển số P.104 “Cấm xe máy”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe máy, trừ các xe được ưu tiên theo quy định.Biển không có giá trị cấm những người dắt xe máy.",
+  "hinhanh": "bienbao/camxemay.png"
+
+},
+  {
+  "tenbienbao": "Biển số P.105 “Cấm xe ô tô và xe máy”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe cơ giới và xe máy đi qua trừ các xe được ưu tiên theo quy định.",
+  "hinhanh": "bienbao/camotovaxemay.png"
+
+},
+  {
+  "tenbienbao": "Biển số P.106a “Cấm xe ô tô tải”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe ô tô tải trừ các xe được ưu tiên theo quy định.\nBiển có hiệu lực cấm đối với cả máy kéo và các xe máy chuyên dùng đi vào đoạn đường đặt biển.",
+  "hinhanh": "bienbao/camxeototai.png"
+
+},{
+  "tenbienbao": "Biển số P.106b “Cấm xe ô tô tải”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe ô tô tải có khối lượng chuyên chở (theo Giấy chứng nhận kiểm định an toàn kỹ thuật và bảo vệ môi trường) lớn hơn một giá trị nhất định.",
+  "hinhanh": "bienbao/camxeototai2,5T.png"
+
+},{
+  "tenbienbao": "Biển số P.107 “Cấm xe ôtô khách và xe ô tô tải”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm xe ô tô chở khách và các loại xe ô tô tải kể cả các loại máy kéo và xe máy chuyên dùng đi qua trừ các xe được ưu tiên theo quy định.",
+  "hinhanh": "bienbao/camxeotokhachvaxeototai.png"
+
+},{
+  "tenbienbao": "Biển số P.107a “Cấm xe ô tô khách”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm ô tô chở khách đi qua trừ các xe ưu tiên theo quy định.",
+  "hinhanh": "bienbao/camxeotokhach.png"
+
+},{
+  "tenbienbao": "Biển số P.107b “Cấm xe ô tô taxi”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm xe ô tô taxi đi lại.",
+  "hinhanh": "bienbao/camxeototaxi.png"
+
+},
+  {
+  "tenbienbao": "Biển số P.108 “Cấm xe kéo rơ-moóc”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe cơ giới kéo theo rơ-moóc kể cả xe máy, máy kéo, ô tô khách kéo theo rơ-moóc đi lại, trừ loại ô tô sơ-mi-rơ-moóc và các xe được ưu tiên (có kéo theo rơ-moóc) theo quy định.",
+  "hinhanh": "bienbao/camxekeoromooc.png"
+
+},
+  {
+  "tenbienbao": "Biển số P.108a “Cấm xe sơ-mi rơ-moóc”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe sơ-mi rơ-moóc và các xe kéo rơ- moóc trừ các xe được ưu tiên (có dạng xe sơ-mi rơ-moóc hoặc có kéo theo rơ-moóc) theo quy định.",
+  "hinhanh": "bienbao/camxeso_mi_ro_mooc.png"
+
+},
+  {
+  "tenbienbao": "Biển số P.109 “Cấm máy kéo”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại máy kéo, kể cả máy kéo bánh hơi và bánh xích đi qua..",
+  "hinhanh": "bienbao/cammaykeo.png"
+
+}
+,
+  {
+    "tenbienbao": "Biển số P.110a “Cấm xe đạp”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe đạp đi qua.Biển không có giá trị cấm những người dắt xe đạp.",
+    "hinhanh": "bienbao/camxedap.png"
+
+  }
+,
+  {
+    "tenbienbao": "Biển số P.110b “Cấm xe đạp thồ”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe đạp thồ đi qua.Biển này không cấm người dắt loại xe này.",
+    "hinhanh": "bienbao/camxedaptho.png"
+
+  }
+,
+  {
+    "tenbienbao": "Biển số P.111a “Cấm xe gắn máy”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe gắn máy đi qua.Biển không có giá trị đối với xe đạp.",
+    "hinhanh": "bienbao/camxeganmay.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.111b “Cấm xe ba bánh loại có động cơ”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe ba bánh loại có động cơ như xe lam, xe xích lô máy, xe lôi máy,....",
+    "hinhanh": "bienbao/camxebabanhloaicodongco.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.111c “Cấm xe ba bánh loại có động cơ”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe ba bánh loại có động cơ như xe lam, xe xích lô máy, xe lôi máy,....",
+    "hinhanh": "bienbao/camxe3banhloaicodongco.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.111d “Cấm xe ba bánh loại không có động cơ”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe ba bánh loại không có động cơ như xe xích lô, xe lôi đạp,...",
+    "hinhanh": "bienbao/camxe3banhloaijkhongcodongco.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.112 “Cấm người đi bộ”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm người đi bộ qua lại.",
+    "hinhanh": "bienbao/camnguoidibo.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.113 “Cấm xe người kéo, đẩy”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe thô sơ, chuyển động do người kéo, đẩy đi qua.\nBiển không có giá trị cấm những xe nôi của trẻ em và phương tiện chuyên dùng để đi lại của những người tàn tật.",
+    "hinhanh": "bienbao/camxenguoikeoday.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.114 “Cấm xe súc vật kéo”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm súc vật vận tải hàng hóa hoặc hành khách dù kéo xe hay chở trên lưng đi qua.",
+    "hinhanh": "bienbao/camxesucvatkeo.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.115 “Hạn chế trọng tải toàn bộ xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm các xe (cơ giới và thô sơ) kể cả các xe được ưu tiên theo quy định, có trọng tải toàn bộ xe (trọng tải bản thân xe cộng với khối lượng người, hành lý và hàng hóa xếp trên xe) vượt quá trị số ghi trên biển đi qua.",
+    "hinhanh": "bienbao/hanchetrongtaitoanboxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.116 “Hạn chế tải trọng trên trục xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm các xe (cơ giới và thô sơ) kể cả các xe được ưu tiên theo quy định, có trọng tải toàn bộ xe (cả xe và hàng) phân bổ trên một trục bất kỳ của xe (tải trọng trục xe) vượt quá trị số ghi trên biển đi qua.",
+    "hinhanh": "bienbao/hanchetrontaitrentrucxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.117 “Hạn chế chiều cao”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo hạn chế chiều cao của xe.Biển có hiệu lực cấm các xe (cơ giới và thô sơ) có chiều cao vượt quá trị số ghi trên biển đi qua, kể cả các xe được ưu tiên theo quy định.",
+    "hinhanh": "bienbao/hanchechieucao.png"
+
+  },
+  {
+  "tenbienbao": "Biển số P.118 “Hạn chế chiều ngang xe”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo hạn chế chiều ngang của xe.Biển có hiệu lực cấm các xe (cơ giới và thô sơ) kể cả các xe được ưu tiên theo quy định có chiều ngang (kể cả xe và hàng hóa) vượt quá trị số ghi trên biển đi qua.",
+  "hinhanh": "bienbao/hanchechieungangxe.png"
+
+},{
+  "tenbienbao": "Biển số P.119 “Hạn chế chiều dài xe”",
+  "loaibienbao": "Cam",
+  "mota": "Dùng để báo đường cấm các loại xe (cơ giới và thô sơ) kể cả các xe được ưu tiên theo quy định, có độ dài toàn bộ kể cả xe và hàng lớn hơn trị số ghi trên biển đi qua.",
+  "hinhanh": "bienbao/hanchechieudaixe.png"
+
+},
+  {
+    "tenbienbao": "Biển số P.120 “Hạn chế chiều dài xe cơ giới kéo theo rơ-moóc hoặc sơ-mi rơ-moóc”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm các loại xe cơ giới kéo theo moóc kể cả ô tô sơ-mi-rơ-moóc và các loại xe được ưu tiên kéo moóc theo luật nhà nước quy định, có độ dài toàn bộ kể cả xe, moóc và hàng lớn hơn trị số ghi trên biển đi qua.",
+    "hinhanh": "bienbao/hanchechieudaixecogioikeo.png"
+
+  }
+,
+  {
+    "tenbienbao": "Biển số P.112 “Cấm người đi bộ”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm người đi bộ qua lại.",
+    "hinhanh": "bienbao/camnguoidibo.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.121 “Cự ly tối thiểu giữa hai xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo xe ô tô phải đi cách nhau một khoảng tối thiểu",
+    "hinhanh": "bienbao/culytoithieugiuahaixe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.112 “Cấm người đi bộ”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm người đi bộ qua lại.",
+    "hinhanh": "bienbao/camnguoidibo.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.123a “Cấm rẽ trái”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm rẽ trái (theo hướng mũi tên chỉ) ở những vị trí đường giao nhau; biển không cấm quay đầu xe.\nBiển có hiệu lực cấm các loại xe (cơ giới và thô sơ) rẽ sang phía trái trừ các xe được ưu tiên theo quy định.",
+    "hinhanh": "bienbao/camretrai.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.123b “Cấm rẽ phải”",
+    "loaibienbao": "Cam",
+    "mota": "Để báo cấm rẽ phải (theo hướng mũi tên chỉ) ở những vị trí đường giao nhau; biển không cấm quay đầu xe.\nBiển có hiệu lực cấm các loại xe (cơ giới và thô sơ) rẽ sang phía phải trừ các xe được ưu tiên theo quy định.",
+    "hinhanh": "bienbao/camrephai.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.124a “Cấm quay đầu xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm các loại xe quay đầu (theo kiểu chữ); chiều mũi tên phù hợp với chiều cấm quay đầu xe; biển không cấm rẽ trái.\nBiển có hiệu lực cấm các loại xe (cơ giới và thô sơ) trừ các xe được ưu tiên theo quy định.",
+    "hinhanh": "bienbao/camquaydauxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.124b “Cấm quay đầu xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm xe ô tô quay đầu (theo kiểu chữ U); chiều mũi tên phù hợp với chiều cấm xe ô tô quay đầu; biển không cấm rẽ trái.\nBiển có hiệu lực cấm xe ô tô và xe máy 3 bánh (side car) trừ các xe được ưu tiên theo quy định.",
+    "hinhanh": "bienbao/camquaydauxeoto.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.124c “Cấm rẽ trái và quay đầu xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm các loại xe rẽ trái đồng thời cấm quay đầu.",
+    "hinhanh": "bienbao/camretraivaquaydauxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.124d “Cấm rẽ phải và quay đầu xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm các loại xe rẽ phải đồng thời cấm quay đầu.",
+    "hinhanh": "bienbao/camrephaivaquaydauxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.124e “Cấm ô tô rẽ trái và quay đầu xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm xe ô tô rẽ trái và đồng thời cấm quay đầu.",
+    "hinhanh": "bienbao/camotorephaivaquaydauxe.png.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.124f “Cấm ô tô rẽ phải và quay đầu xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm xe ô tô rẽ phải và đồng thời cấm quay đầu.",
+    "hinhanh": "bienbao/camotorephaivaquaydauxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.125 “Cấm vượt”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm các loại xe cơ giới vượt nhau.\nBiển có hiệu lực cấm tất cả các loại xe cơ giới vượt nhau (kể cả xe được ưu tiên theo quy định) nhưng được phép vượt xe máy 2 bánh, xe gắn máy.",
+    "hinhanh": "bienbao/camvuot.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.126 “Cấm xe ô tô tải vượt”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm các loại ô tô tải vượt xe cơ giới khác; biển không cấm các loại xe cơ giới khác vượt nhau và vượt ô tô tải.\nBiển có hiệu lực cấm các loại ôtô tải có khối lượng chuyên chở lớn hơn 3.500 kg kể cả các xe được ưu tiên theo quy định vượt xe cơ giới khác. Được phép vượt xe máy 2 bánh, xe gắn máy.",
+    "hinhanh": "bienbao/camxeototaivuot.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.127 “Tốc độ tối đa cho phép”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo tốc độ tối đa cho phép các xe cơ giới chạy.Biển có hiệu lực cấm các loại xe cơ giới chạy với tốc độ tối đa vượt quá trị số ghi trên biển trừ các xe được ưu tiên theo quy định.",
+    "hinhanh": "bienbao/tocdotoidachophep.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.127a “Tốc độ tối đa cho phép về ban đêm”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để quy định tốc độ tối đa về ban đêm cho các phương tiện.",
+    "hinhanh": "bienbao/tocdotoidachophepvebandem.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.127b “Biển ghép tốc độ tối đa cho phép trên từng làn đường”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để quy định tốc độ tối đa cho phép trên từng làn đường.",
+    "hinhanh": "bienbao/biengheptocdotoidachophep.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.127c “Biển ghép tốc độ tối đa cho phép theo phương tiện, trên từng làn đường”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để quy định tốc độ tối đa cho phép theo phương tiện trên từng làn đường.",
+    "hinhanh": "bienbao/biengheptocdotoidatheophuongtien.png"
+
+  },
+  {
+    "tenbienbao": "Biển số DP.127 “Biển hết tốc độ tối đa cho phép theo biển ghép”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo hết đoạn đường tốc độ tối đa cho phép.",
+    "hinhanh": "bienbao/bienhettocdotoidachopheptheobienghep.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.128 “Cấm sử dụng còi”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo cấm các loại xe sử dụng còi.",
+    "hinhanh": "bienbao/camsudungcoi.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.129 “Kiểm tra”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo nơi đặt trạm kiểm tra; các loại phương tiện vận tải qua đó phải dừng lại để làm thủ tục kiểm tra, kiểm soát theo quy định.",
+    "hinhanh": "bienbao/kiemtra.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.130 “Cấm dừng xe và đỗ xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo nơi cấm dừng xe và đỗ xe.Biển có hiệu lực cấm các loại xe cơ giới dừng và đỗ ở phía đường có đặt biển trừ các xe được ưu tiên theo quy định.",
+    "hinhanh": "bienbao/camdungxevadoxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.131a “Cấm đỗ xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo nơi cấm đỗ xe trừ các xe được ưu tiên theo quy định.Biển có hiệu lực cấm các loại xe cơ giới đỗ ở phía đường có đặt biển.",
+    "hinhanh": "bienbao/camdoxe.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.131b “Cấm đỗ xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo nơi cấm đỗ xe trừ các xe được ưu tiên theo quy định Biển có hiệu lực cấm các loại xe cơ giới đỗ ở phía đường có đặt biển vào những ngày lẻ.",
+    "hinhanh": "bienbao/camdoxeb.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.131c  “Cấm đỗ xe”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo nơi cấm đỗ xe trừ các xe được ưu tiên theo quy định Biển có hiệu lực cấm các loại xe cơ giới đỗ ở phía đường có đặt biển vào những ngày chẵn.",
+    "hinhanh": "bienbao/camdoxec.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.132 “Nhường đường cho xe cơ giới đi ngược chiều qua đường hẹp”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo các loại xe (cơ giới và thô sơ) kể cả các xe được ưu tiên phải nhường đường cho các loại xe cơ giới đang đi theo hướng ngược lại qua các đoạn đường hẹp hoặc cầu hẹp.",
+    "hinhanh": "bienbao/nhuongduongchoxecogioi.png"
+
+  },
+  {
+    "tenbienbao": "Biển số DP.133 “Hết cấm vượt”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo hết đoạn đường cấm vượt.",
+    "hinhanh": "bienbao/hetcamvuot.png"
+
+  },
+  {
+    "tenbienbao": "Biển số DP.134 “Hết tốc độ tối đa cho phép”",
+    "loaibienbao": "Cam",
+    "mota": " cho phép”\nDùng để báo hết đoạn đường tốc độ tối đa.",
+    "hinhanh": "bienbao/hettocdotoidachophep.png"
+
+  },
+  {
+    "tenbienbao": "Biển số DP.135 “Hết tất cả các lệnh cấm”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo hết đoạn đường mà nhiều biển báo cấm cùng hết hiệu lực.",
+    "hinhanh": "bienbao/hettatcacaclenhcam.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.136 “Cấm đi thẳng”",
+    "loaibienbao": "Cam",
+    "mota": "Đường ở phía trước cấm tất cả các loại xe (trừ xe ưu tiên theo quy định) đi thẳng.",
+    "hinhanh": "bienbao/camdithang.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.137 “Cấm rẽ trái, rẽ phải”",
+    "loaibienbao": "Cam",
+    "mota": "Các ngả đường phía trước cấm tất cả các loại xe (trừ xe ưu tiên theo quy định) rẽ trái hay rẽ phải.",
+    "hinhanh": "bienbao/camretrairephai.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.138 “Cấm đi thẳng, rẽ trái”",
+    "loaibienbao": "Cam",
+    "mota": "Biểu thị đường qua nút giao cấm tất cả các loại xe (trừ xe ưu tiên theo quy định) đi thẳng, rẽ trái.",
+    "hinhanh": "bienbao/camdithangretrai.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.139 “Cấm đi thẳng, rẽ phải”",
+    "loaibienbao": "Cam",
+    "mota": "Biểu thị đường qua nút giao cấm tất cả các loại xe (trừ xe ưu tiên theo quy định) đi thẳng, rẽ phải.",
+    "hinhanh": "bienbao/camdithangretrai.png"
+
+  },
+  {
+    "tenbienbao": "Biển số P.140 “Cấm xe công nông và các loại xe tương tự”",
+    "loaibienbao": "Cam",
+    "mota": "Dùng để báo đường cấm xe công nông.",
+    "hinhanh": "bienbao/camxecongnong.png"
+
+  }
+]
