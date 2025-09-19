@@ -1,18 +1,28 @@
 package com.example.luyenthiblxmay;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.work.Constraints;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.example.luyenthiblxmay.controller.QuestionController;
 import com.example.luyenthiblxmay.controller.UserQuestionController;
@@ -21,6 +31,7 @@ import com.example.luyenthiblxmay.database.AppDatabase;
 import com.example.luyenthiblxmay.model.Question;
 import com.example.luyenthiblxmay.model.User;
 import com.example.luyenthiblxmay.model.UserQuestion;
+import com.example.luyenthiblxmay.services.ReminderWorker;
 import com.example.luyenthiblxmay.view.BienBaoActivity;
 import com.example.luyenthiblxmay.view.ExamTestActivity;
 import com.example.luyenthiblxmay.view.LoginActivity;
@@ -28,7 +39,9 @@ import com.example.luyenthiblxmay.view.ModuleActivity;
 import com.example.luyenthiblxmay.view.TipsActivity;
 import com.example.luyenthiblxmay.view.WrongQuestionsActivity;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
@@ -43,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        // ✅ Xin quyền thông báo cho Android 13+
+        requestNotificationPermission();
+
+        // ✅ Lên lịch notification sau 30s
+        OneTimeWorkRequest request =
+                new OneTimeWorkRequest.Builder(ReminderWorker.class)
+                        .setInitialDelay(30, TimeUnit.SECONDS)
+                        .build();
+
+        WorkManager.getInstance(this).enqueue(request);
 
         // Padding cho hệ thống Bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_layout), (v, insets) -> {
@@ -76,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+
+        // 👉 Thêm vào đây
+        scheduleDailyReminder();
 
         // --- Khởi tạo DB và lấy thông tin user ---
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
@@ -111,6 +138,65 @@ public class MainActivity extends AppCompatActivity {
         questionController = new QuestionController(getApplication());
         userQuestionController = new UserQuestionController(getApplication());
     }
+
+    // 👇 Thêm cuối class MainActivity (ngoài onCreate, onResume)
+    private void scheduleDailyReminder() {
+        Calendar calendar = Calendar.getInstance();
+        long now = calendar.getTimeInMillis();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        calendar.set(Calendar.MINUTE, 16);
+        calendar.set(Calendar.SECOND, 0);
+
+        if (calendar.getTimeInMillis() <= now) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        long initialDelay = calendar.getTimeInMillis() - now;
+
+        Constraints constraints = new Constraints.Builder().build();
+
+        PeriodicWorkRequest reminderRequest =
+                new PeriodicWorkRequest.Builder(ReminderWorker.class, 24, TimeUnit.HOURS)
+                        .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
+                        .setConstraints(constraints)
+                        .build();
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                "daily_study_reminder",
+                ExistingPeriodicWorkPolicy.REPLACE,
+                reminderRequest
+        );
+    }
+
+    private void requestNotificationPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        101
+                );
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 101) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // ✅ Được cấp quyền, bạn có thể gửi notification
+                Toast.makeText(this, "Đã cho phép thông báo", Toast.LENGTH_SHORT).show();
+            } else {
+                // ❌ User từ chối quyền, có thể hiển thị Toast giải thích
+                Toast.makeText(this, "Bạn đã từ chối quyền thông báo. Một số tính năng có thể không hoạt động.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
 
     @Override
     protected void onResume() {
