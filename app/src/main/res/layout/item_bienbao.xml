@@ -17,7 +17,8 @@
             android:id="@+id/imgBienBao"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_placeholder" />
 
         <LinearLayout
