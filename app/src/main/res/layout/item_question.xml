@@ -23,8 +23,8 @@
         android:id="@+id/imgQuestion"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:visibility="gone"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"        android:visibility="gone"
         android:layout_marginTop="8dp"
         android:background="#E0E0E0" /> <!-- nền xám nhạt nếu ảnh không có -->
 
