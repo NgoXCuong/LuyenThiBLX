@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         // ✅ Lên lịch notification sau 30s
         OneTimeWorkRequest request =
                 new OneTimeWorkRequest.Builder(ReminderWorker.class)
-                        .setInitialDelay(30, TimeUnit.SECONDS)
+                        .setInitialDelay(864000, TimeUnit.SECONDS)
                         .build();
 
         WorkManager.getInstance(this).enqueue(request);

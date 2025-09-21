@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LuyenThiBLXMay</string>
+    <string name="app_name">Luyện Thi BLX Máy</string>
 
     <string name="category_prompt">Chọn loại câu hỏi</string>
     <string-array name="question_categories">

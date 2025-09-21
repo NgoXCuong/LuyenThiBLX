@@ -30,7 +30,7 @@ public class ReminderWorker extends Worker {
         // Sau khi xong → enqueue lại sau 30s
         WorkManager.getInstance(getApplicationContext()).enqueue(
                 new OneTimeWorkRequest.Builder(ReminderWorker.class)
-                        .setInitialDelay(30, TimeUnit.SECONDS)  // trong thoi gian 30s
+                        .setInitialDelay(86400, TimeUnit.SECONDS)  // trong thoi gian 30s
                         .build()
         );
 

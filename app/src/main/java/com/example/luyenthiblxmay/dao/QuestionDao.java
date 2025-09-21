@@ -38,4 +38,11 @@ public interface QuestionDao {
 
     @Query("SELECT * FROM questions ORDER BY RANDOM() LIMIT 25")
     LiveData<List<Question>> getRandomQuestions();
+
+    @Query("SELECT * FROM questions WHERE category = :category ORDER BY RANDOM() LIMIT :limit")
+    LiveData<List<Question>> getRandomByCategory(String category, int limit);
+
+    @Query("SELECT * FROM questions WHERE category = :category ORDER BY RANDOM() LIMIT :limit")
+    List<Question> getRandomByCategorySync(String category, int limit);
+
 }

@@ -52,6 +52,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                     AppDatabase.class,
                                     "app_thi_blx"
                             )
+                            .createFromAsset("database/app_thi_blx.db") // 👈 Thêm dòng này để load DB có sẵn từ assets
                             .fallbackToDestructiveMigration() // Xóa DB cũ nếu verify schema fail
                             .addCallback(new Callback() {
                                 @Override

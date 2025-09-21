@@ -83,7 +83,7 @@ public class ExamTestActivity extends AppCompatActivity {
             currentExamId = examController.insertExamResultSync(examResult);
 
             runOnUiThread(() -> {
-                examController.getRandomQuestions().observe(ExamTestActivity.this, questions -> {
+                examController.getExamQuestions().observe(ExamTestActivity.this, questions -> {
                     if (questions != null && !questions.isEmpty()) {
                         questionList = questions;
                         showQuestion(currentIndex);
